@@ -1,20 +1,15 @@
 {
   "name": "zebaz-ppf-studio",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
-  "description": "ZEBAZ PPF Studio website and WhatsApp booking backend",
+  "description": "ZEBAZ PPF Studio booking website with PostgreSQL admin database",
   "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "engines": {
-    "node": ">=20"
-  },
+  "scripts": {"start":"node server.js"},
+  "engines": {"node":">=20"},
   "dependencies": {
-    "@whiskeysockets/baileys": "^6.7.18",
-    "express": "^5.1.0",
-    "pino": "^9.7.0",
-    "qrcode": "^1.5.4"
+    "express":"^5.1.0",
+    "pino":"^9.7.0",
+    "pg":"^8.16.3"
   }
 }
