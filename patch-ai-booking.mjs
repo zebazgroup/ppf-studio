@@ -6,7 +6,7 @@ const start=src.indexOf("app.post('/api/ai',async(req,res)=>{");
 const end=src.indexOf("\n\nconst compactChatCss=",start);
 if(start<0||end<0)throw new Error('AI endpoint block not found');
 
-const replacement=String.raw`const AI_BOOKING_INSTRUCTIONS=\`
+const replacement=`const AI_BOOKING_INSTRUCTIONS=\`
 APPOINTMENT / BOOKING WORKFLOW:
 - You can create a pending service appointment request directly in the ZEBAZ admin system by using the create_appointment_request tool.
 - Only start the booking workflow when the customer clearly asks to book, reserve, make an appointment, take a time slot, or send a service request. Do not create a request for ordinary price/specification questions.
@@ -39,10 +39,10 @@ async function saveAiAppointment(raw={},fallbackLanguage='ku'){
   const service='AI • '+serviceLabel;
   const serviceCode='ai_'+serviceType.replace(/[^a-z0-9_\-]/gi,'').slice(0,55);
   const noteText='AI booking request — pending staff confirmation'+(notes?' • '+notes:'');
-  const dup=await pool.query(`SELECT id FROM bookings WHERE phone=$1 AND booking_date=$2 AND service=$3 AND received_at > NOW()-INTERVAL '15 minutes' ORDER BY received_at DESC LIMIT 1`,[phone,preferred,service]);
+  const dup=await pool.query(\`SELECT id FROM bookings WHERE phone=$1 AND booking_date=$2 AND service=$3 AND received_at > NOW()-INTERVAL '15 minutes' ORDER BY received_at DESC LIMIT 1\`,[phone,preferred,service]);
   if(dup.rows[0])return{ok:true,duplicate:true,requestId:dup.rows[0].id,status:'pending_confirmation'};
   const id=crypto.randomUUID();
-  await pool.query(`INSERT INTO bookings(id,booking_date,name,phone,car,year,vin,service,service_code,request_type,notes,language) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,[id,preferred,name,phone,car,year,'',service,serviceCode,requestType,noteText,language]);
+  await pool.query(\`INSERT INTO bookings(id,booking_date,name,phone,car,year,vin,service,service_code,request_type,notes,language) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)\`,[id,preferred,name,phone,car,year,'',service,serviceCode,requestType,noteText,language]);
   return{ok:true,duplicate:false,requestId:id,status:'pending_confirmation',requestType};
 }
 
