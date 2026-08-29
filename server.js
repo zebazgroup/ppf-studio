@@ -29,8 +29,15 @@ app.get('/admin/api/qr',auth,(req,res)=>res.json({ok:true,ready:true,database:tr
 app.get('/status',async(req,res)=>{try{await pool.query('SELECT 1');res.json({ready:true,database:true})}catch{res.status(503).json({ready:false,database:false})}});
 function fromMessage(message=''){const get=k=>{const m=String(message).match(new RegExp('^'+k+':\\s*(.*)$','mi'));return m?m[1].trim():''};return{name:get('Name'),phone:get('Phone'),car:get('Car'),year:get('Year'),vin:get('VIN'),service:get('Service'),date:get('Date & Time'),notes:get('Notes')}}
 app.post('/send-booking',async(req,res)=>{try{const parsed=fromMessage(req.body?.message),b=req.body?.booking||parsed;const r={id:crypto.randomUUID(),date:String(b.date||''),name:String(b.name||'').trim(),phone:String(b.phone||'').trim(),car:String(b.car||'').trim(),year:String(b.year||'').trim(),vin:String(b.vin||'').trim().toUpperCase(),service:String(b.service||'').trim(),notes:String(b.notes||'').trim(),language:String(b.language||'')};if(!r.name||!r.phone||!r.car||!r.year||r.vin.length!==17||!r.service)return res.status(400).json({ok:false,error:'Missing or invalid booking data'});await pool.query('INSERT INTO bookings(id,booking_date,name,phone,car,year,vin,service,notes,language) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)',[r.id,r.date,r.name,r.phone,r.car,r.year,r.vin,r.service,r.notes,r.language]);res.json({ok:true,saved:true,id:r.id})}catch(e){console.error('Booking save failed:',e.message);res.status(500).json({ok:false,error:'Could not save booking'})}});
-app.get('/',(req,res)=>res.sendFile(path.join(__dirname,'public','home.html')));
-app.get(['/ppf','/ppf/'],(req,res)=>res.sendFile(path.join(__dirname,'public','index.html')));
-app.get('/admin',(req,res)=>res.sendFile(path.join(__dirname,'public','admin.html')));
+const page=(file)=>(req,res)=>res.sendFile(path.join(__dirname,'public',file));
+app.get('/',page('home.html'));
+app.get(['/studio','/studio/'],page('studio.html'));
+app.get(['/ppf','/ppf/'],page('index.html'));
+app.get(['/fb-oil','/fb-oil/','/oil','/oil/'],page('fb-oil.html'));
+app.get(['/carwash','/carwash/'],page('carwash.html'));
+app.get(['/game-center','/game-center/','/game','/game/'],page('game-center.html'));
+app.get(['/media','/media/'],page('media.html'));
+app.get(['/ai','/ai/'],page('ai.html'));
+app.get('/admin',page('admin.html'));
 app.use((req,res)=>res.status(404).sendFile(path.join(__dirname,'public','home.html')));
 const port=process.env.PORT||3000;app.listen(port,'0.0.0.0',()=>console.log(`ZEBAZ Group running on port ${port}`));
