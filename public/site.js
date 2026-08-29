@@ -47,7 +47,7 @@
         el.style.display=item.visible===false?'none':'';
         if(item.visible===false)continue;
         if(el.hasAttribute('data-content-image')&&item.imageUrl){
-          const safe=String(item.imageUrl).replace(/'/g,"%27");
+          const safe=String(item.imageUrl).replace(/'/g,'%27');
           el.style.setProperty('--z-content-image',`url('${safe}')`);
           el.classList.add('has-image');
           if(!el.classList.contains('hv-hero'))el.style.backgroundImage=`url('${safe}')`;
@@ -99,7 +99,16 @@
       html[data-theme="light"] body:before{background:radial-gradient(circle at 80% 8%,var(--z-accent-soft),transparent 24%),radial-gradient(circle at 10% 48%,#00000007,transparent 18%)!important}
       .gold,.eyebrow,.division-name,.hv-kicker,.hv-card .more,.hv-owner-visual:after,.hv-metric strong,.hv-stat strong,.z-menu-links a:after,[class*="gold"]{color:var(--z-accent)!important}
       .cta.primary,.submit,.composer button,.hv-btn.gold,.user{background:var(--z-accent)!important;border-color:var(--z-accent)!important;color:#080808!important}
-      .cta:hover,.card:hover,.langpick button:hover,.langpick button.active,.gate-langs button:hover{border-color:var(--z-accent-deep)!important}
+      .cta:hover,.card:hover,.gate-langs button:hover{border-color:var(--z-accent-deep)!important}
+
+      /* Compact language dropdown: only the selected language is visible until clicked. */
+      .langpick{position:relative!important;display:flex!important;flex-direction:column!important;width:86px!important;height:36px!important;overflow:visible!important;gap:5px!important;z-index:190!important;margin-inline-start:8px}
+      .langpick button{display:none!important;width:100%!important;min-height:36px!important;flex:0 0 36px!important;align-items:center!important;justify-content:center!important;white-space:nowrap!important;box-shadow:0 8px 22px #0003!important}
+      .langpick button.active{display:flex!important;order:-1!important;border-color:var(--z-accent-deep)!important;color:var(--z-accent)!important}
+      .langpick button.active:after{content:'⌄';font-size:10px;margin-inline-start:6px;opacity:.65}
+      .langpick:focus-within{z-index:420!important}
+      .langpick:focus-within button{display:flex!important;background:var(--z-surface)!important;border-color:var(--z-line)!important;color:var(--z-text)!important}
+      .langpick:focus-within button.active{border-color:var(--z-accent-deep)!important;color:var(--z-accent)!important;background:var(--z-accent-faint)!important}
 
       .z-global-menu{position:fixed;top:14px;inset-inline-end:14px;z-index:260}
       .z-menu-btn{width:46px;height:46px;border-radius:14px;border:1px solid var(--z-accent-deep);background:#090909e8;backdrop-filter:blur(18px);display:grid;place-content:center;gap:5px;cursor:pointer;box-shadow:0 12px 35px #0008}
@@ -112,20 +121,32 @@
       .z-menu-close{width:40px;height:40px;border-radius:50%;border:1px solid #333;background:#111;color:#fff;font-size:26px;cursor:pointer}
       .z-menu-links{display:grid;gap:7px;margin-top:18px}.z-menu-links a{display:flex;align-items:center;justify-content:space-between;text-decoration:none;color:#d5d5d5;border:1px solid transparent;border-radius:14px;padding:14px 15px;font-size:14px}.z-menu-links a:after{content:'›';font-size:20px}[dir=rtl] .z-menu-links a:after{content:'‹'}
       .z-menu-links a:hover,.z-menu-links a.current{background:#111;border-color:var(--z-accent-deep);color:var(--z-accent)}
-      .z-menu-langs{display:flex;gap:7px;border-top:1px solid #222;margin-top:18px;padding-top:18px}.z-menu-langs button{flex:1;border:1px solid #333;background:#0d0d0d;color:#ddd;border-radius:12px;padding:11px;cursor:pointer}.z-menu-langs button.active{border-color:var(--z-accent-deep);color:var(--z-accent);background:var(--z-accent-faint)}
-      .z-theme-wrap{border-top:1px solid #222;margin-top:16px;padding-top:16px}.z-theme-label{display:block;color:#858585;font-size:11px;margin-bottom:9px}.z-theme-modes{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.z-theme-modes button{border:1px solid #333;background:#0d0d0d;color:#cfcfcf;border-radius:12px;padding:10px 7px;cursor:pointer;font-size:12px}.z-theme-modes button:hover,.z-theme-modes button.active{border-color:var(--z-accent-deep);color:var(--z-accent);background:var(--z-accent-faint)}.z-theme-icon{display:block;font-size:16px;margin-bottom:4px}
+
+      /* Same compact language behaviour inside the slide-out menu. */
+      .z-menu-langs{position:relative;display:flex!important;flex-direction:column!important;width:100px;height:40px;overflow:visible;gap:5px;border-top:1px solid #222;margin-top:18px;padding-top:12px;z-index:10}
+      .z-menu-langs button{display:none!important;width:100%;min-height:36px;flex:0 0 36px;border:1px solid #333;background:#0d0d0d;color:#ddd;border-radius:12px;padding:8px 10px;cursor:pointer;align-items:center;justify-content:center}
+      .z-menu-langs button.active{display:flex!important;order:-1;border-color:var(--z-accent-deep);color:var(--z-accent);background:var(--z-accent-faint)}
+      .z-menu-langs button.active:after{content:'⌄';font-size:10px;margin-inline-start:6px;opacity:.65}
+      .z-menu-langs:focus-within{z-index:50}.z-menu-langs:focus-within button{display:flex!important}
+
       .z-back-home{position:fixed;bottom:18px;inset-inline-start:18px;z-index:120;text-decoration:none;color:var(--z-accent);background:#090909e8;border:1px solid var(--z-accent-deep);border-radius:999px;padding:11px 15px;font-size:12px;backdrop-filter:blur(16px);box-shadow:0 12px 35px #0008}.z-menu-open{overflow:hidden}
 
-      .z-appearance-dock{position:fixed;top:14px;inset-inline-start:14px;z-index:255;display:flex;align-items:center;gap:7px;padding:6px;border:1px solid var(--z-line);border-radius:16px;background:#090909e9;box-shadow:0 12px 35px #0008;backdrop-filter:blur(18px)}
-      .z-quick-modes{display:flex;gap:4px}.z-quick-modes button,.z-color-btn{height:34px;min-width:34px;border:1px solid #333;border-radius:10px;background:#111;color:#bbb;cursor:pointer;font-size:13px;display:grid;place-items:center;transition:.18s}
-      .z-quick-modes button:hover,.z-quick-modes button.active,.z-color-btn:hover{border-color:var(--z-accent-deep);color:var(--z-accent);background:var(--z-accent-faint)}
-      .z-color-wrap{position:relative}.z-color-btn{color:var(--z-accent);font-size:17px}
-      .z-color-panel{position:absolute;top:43px;inset-inline-start:0;width:205px;padding:12px;border:1px solid var(--z-line);border-radius:16px;background:#0c0c0cf5;box-shadow:0 18px 55px #000a;backdrop-filter:blur(18px);opacity:0;transform:translateY(-7px) scale(.97);pointer-events:none;transition:.18s}
+      /* Appearance control stays on the physical left, away from the ZEBAZ logo in RTL. */
+      .z-appearance-dock{position:fixed;top:14px;left:14px!important;right:auto!important;inset-inline-start:auto!important;inset-inline-end:auto!important;z-index:255;display:flex;align-items:flex-start;gap:7px;padding:6px;border:1px solid var(--z-line);border-radius:16px;background:#090909e9;box-shadow:0 12px 35px #0008;backdrop-filter:blur(18px)}
+      .z-quick-modes{position:relative;display:flex!important;flex-direction:column!important;width:36px;height:34px;overflow:visible;gap:5px;z-index:20}
+      .z-quick-modes button,.z-color-btn{height:34px;min-width:34px;border:1px solid #333;border-radius:10px;background:#111;color:#bbb;cursor:pointer;font-size:13px;display:none;place-items:center;transition:.18s;box-shadow:0 8px 20px #0003}
+      .z-quick-modes button.active{display:grid!important;order:-1;border-color:var(--z-accent-deep);color:var(--z-accent);background:var(--z-accent-faint)}
+      .z-quick-modes button.active:after{content:'⌄';font-size:8px;position:absolute;inset-inline-end:3px;bottom:2px;opacity:.6}
+      .z-quick-modes:focus-within{z-index:60}.z-quick-modes:focus-within button{display:grid!important;background:var(--z-surface);color:var(--z-text);border-color:var(--z-line)}
+      .z-quick-modes:focus-within button.active{border-color:var(--z-accent-deep);color:var(--z-accent);background:var(--z-accent-faint)}
+      .z-color-wrap{position:relative}.z-color-btn{display:grid!important;color:var(--z-accent);font-size:17px}
+      .z-color-btn:hover{border-color:var(--z-accent-deep);color:var(--z-accent);background:var(--z-accent-faint)}
+      .z-color-panel{position:absolute;top:43px;left:0;width:205px;padding:12px;border:1px solid var(--z-line);border-radius:16px;background:#0c0c0cf5;box-shadow:0 18px 55px #000a;backdrop-filter:blur(18px);opacity:0;transform:translateY(-7px) scale(.97);pointer-events:none;transition:.18s}
       .z-color-wrap.open .z-color-panel{opacity:1;transform:none;pointer-events:auto}.z-color-title{font-size:11px;color:var(--z-muted);margin-bottom:10px;display:block}.z-color-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
       .z-swatch{width:30px;height:30px;border-radius:50%;border:2px solid transparent;cursor:pointer;box-shadow:0 0 0 1px var(--z-line);transition:.18s}.z-swatch:hover{transform:scale(1.08)}.z-swatch.active{border-color:var(--z-text);box-shadow:0 0 0 2px var(--z-accent)}
       .z-swatch[data-palette-choice="gold"]{background:#d7b66d}.z-swatch[data-palette-choice="blue"]{background:#62a8ff}.z-swatch[data-palette-choice="red"]{background:#ff625f}.z-swatch[data-palette-choice="green"]{background:#55d994}.z-swatch[data-palette-choice="purple"]{background:#b984ff}
 
-      /* Photos keep their original color in every appearance mode. */
+      /* Photos preserve exactly the same color in dark, light and automatic modes. */
       .hv-hero,.hv-card,.hv-owner-visual,.hv-location:before,[data-content-image],img{filter:none!important;opacity:1!important}
       .hv-hero.has-image:before{background:linear-gradient(90deg,#020202 0,#020202f4 32%,#0202028d 50%,#02020225 70%),var(--z-content-image) center right/cover no-repeat!important}
       .hv-owner-visual.has-image{background:linear-gradient(90deg,#08080822,#080808aa),var(--z-content-image) center/cover no-repeat!important}
@@ -147,7 +168,7 @@
       html[data-theme="light"] .footer,html[data-theme="light"] .home-v2 .footer{background:#f5f2eb!important;border-color:#d8d2c6!important;color:#706b61!important}html[data-theme="light"] .phones a,html[data-theme="light"] .hv-phones a{background:#fffdf8!important;color:#242424!important;border-color:#d8d1c4!important}
       html[data-theme="light"] .lang-gate{background:radial-gradient(circle at 50% 0,var(--z-accent-soft),#f5f1e7 43%,#ece8df)!important}html[data-theme="light"] .gate-box{background:#fffdf8ee!important;border-color:#d2cabd!important}html[data-theme="light"] .gate-langs button{background:#fff!important;color:#222!important;border-color:#d5cec0!important}
 
-      /* Home image areas intentionally stay dark/photo-based in light mode for contrast and identical image color. */
+      /* Image sections remain photo-based and dark enough for readable text in light mode. */
       html[data-theme="light"] .hv-hero{background:#030303!important;border-bottom-color:#d8d2c6!important}
       html[data-theme="light"] .hv-hero:before{background:linear-gradient(90deg,#020202 0,#020202f4 32%,#0202028d 50%,#02020225 70%),url('https://www.mountainwestdetailing.com/assets/hero-car-DDPNeaoz.jpg') center right/cover no-repeat!important}
       html[data-theme="light"] .hv-hero.has-image:before{background:linear-gradient(90deg,#020202 0,#020202f4 32%,#0202028d 50%,#02020225 70%),var(--z-content-image) center right/cover no-repeat!important}
@@ -162,13 +183,14 @@
       html[data-theme="light"] .hv-strip{background:#f0ece3!important;border-bottom-color:#d8d2c6!important}html[data-theme="light"] .hv-stat{border-color:#d8d2c6!important}html[data-theme="light"] .hv-stat span{color:#6d675e!important}
       html[data-theme="light"] .hv-metric{background:#f7f3ea!important;border-color:#d8d1c4!important}html[data-theme="light"] .hv-metric span{color:#6d675e!important}
 
-      html[data-theme="light"] .z-menu-btn{background:#fffdf8ee;box-shadow:0 12px 35px #5e4b1d20}html[data-theme="light"] .z-menu-drawer{background:linear-gradient(180deg,#fffdf8,#f2eee5);border-color:#d5cec0;box-shadow:-25px 0 80px #6d582b26}html[data-theme="light"][dir=rtl] .z-menu-drawer{box-shadow:25px 0 80px #6d582b26}html[data-theme="light"] .z-menu-head{border-color:#ddd6c9}html[data-theme="light"] .z-menu-close{background:#fff;color:#222;border-color:#d5cec0}html[data-theme="light"] .z-menu-links a{color:#292929}html[data-theme="light"] .z-menu-links a:hover,html[data-theme="light"] .z-menu-links a.current{background:var(--z-accent-faint);border-color:var(--z-accent-deep);color:var(--z-accent-deep)}html[data-theme="light"] .z-menu-langs,html[data-theme="light"] .z-theme-wrap{border-color:#ddd6c9}html[data-theme="light"] .z-menu-langs button,html[data-theme="light"] .z-theme-modes button{background:#fff;color:#2c2c2c;border-color:#d5cec0}html[data-theme="light"] .z-menu-langs button.active,html[data-theme="light"] .z-theme-modes button.active{background:var(--z-accent-faint);color:var(--z-accent-deep);border-color:var(--z-accent-deep)}html[data-theme="light"] .z-theme-label{color:#746e64}html[data-theme="light"] .z-back-home{background:#fffdf8ee;color:var(--z-accent-deep);border-color:var(--z-accent-deep)}
+      html[data-theme="light"] .z-menu-btn{background:#fffdf8ee;box-shadow:0 12px 35px #5e4b1d20}html[data-theme="light"] .z-menu-drawer{background:linear-gradient(180deg,#fffdf8,#f2eee5);border-color:#d5cec0;box-shadow:-25px 0 80px #6d582b26}html[data-theme="light"][dir=rtl] .z-menu-drawer{box-shadow:25px 0 80px #6d582b26}html[data-theme="light"] .z-menu-head{border-color:#ddd6c9}html[data-theme="light"] .z-menu-close{background:#fff;color:#222;border-color:#d5cec0}html[data-theme="light"] .z-menu-links a{color:#292929}html[data-theme="light"] .z-menu-links a:hover,html[data-theme="light"] .z-menu-links a.current{background:var(--z-accent-faint);border-color:var(--z-accent-deep);color:var(--z-accent-deep)}html[data-theme="light"] .z-menu-langs{border-color:#ddd6c9}html[data-theme="light"] .z-menu-langs button{background:#fff;color:#2c2c2c;border-color:#d5cec0}html[data-theme="light"] .z-menu-langs button.active{background:var(--z-accent-faint);color:var(--z-accent-deep);border-color:var(--z-accent-deep)}html[data-theme="light"] .z-back-home{background:#fffdf8ee;color:var(--z-accent-deep);border-color:var(--z-accent-deep)}
       html[data-theme="light"] .z-appearance-dock{background:#fffdf8ef;box-shadow:0 12px 35px #5e4b1d20}html[data-theme="light"] .z-quick-modes button,html[data-theme="light"] .z-color-btn{background:#fff;color:#585149;border-color:#d5cec0}html[data-theme="light"] .z-quick-modes button.active,html[data-theme="light"] .z-quick-modes button:hover,html[data-theme="light"] .z-color-btn:hover{background:var(--z-accent-faint);color:var(--z-accent-deep);border-color:var(--z-accent-deep)}html[data-theme="light"] .z-color-panel{background:#fffdf8f8;box-shadow:0 18px 55px #5e4b1d26}
 
       @media(max-width:760px){
         .z-global-menu{top:10px;inset-inline-end:10px}.z-menu-btn{width:42px;height:42px;border-radius:12px}
-        .z-appearance-dock{top:10px;inset-inline-start:10px;padding:5px;gap:5px}.z-quick-modes button,.z-color-btn{height:32px;min-width:32px;border-radius:9px;font-size:12px}.z-color-panel{top:40px;width:195px}
+        .z-appearance-dock{top:64px!important;left:10px!important;right:auto!important;padding:5px;gap:5px}.z-quick-modes button,.z-color-btn{height:32px;min-width:32px;border-radius:9px;font-size:12px}.z-color-panel{top:40px;width:195px}
         .z-back-home{bottom:12px;inset-inline-start:12px;padding:9px 12px;font-size:11px}.z-menu-drawer{padding:18px}.z-menu-head img{width:155px}
+        .langpick{width:78px!important;height:34px!important}.langpick button{min-height:34px!important;flex-basis:34px!important;padding:8px 9px!important;font-size:11px!important}
       }
     `;
     document.head.appendChild(st);
@@ -209,14 +231,12 @@
     if(document.querySelector('.z-global-menu'))return;
     const path=location.pathname.replace(/\/+$/,'')||'/';
     const shell=document.createElement('div');shell.className='z-global-menu';
-    shell.innerHTML=`<button class="z-menu-btn" aria-label="Menu"><span></span><span></span><span></span></button><div class="z-menu-backdrop"></div><aside class="z-menu-drawer"><div class="z-menu-head"><a href="/"><img src="/zebaz-logo.svg" alt="ZEBAZ"></a><button class="z-menu-close">×</button></div><nav class="z-menu-links"><a href="/" data-ku="سەرەکی" data-ar="الرئيسية" data-en="Home"></a><a href="/ppf" data-ku="PPF و حجز" data-ar="PPF والحجز" data-en="PPF & Booking"></a><a href="/studio" data-ku="ستودیۆ" data-ar="الاستوديو" data-en="Studio"></a><a href="/fb-oil" data-ku="FB Oil" data-ar="FB Oil" data-en="FB Oil"></a><a href="/carwash" data-ku="شۆردنگەی ئۆتۆمبێل" data-ar="غسيل السيارات" data-en="Car Wash"></a><a href="/game-center" data-ku="ناوەندی یاری" data-ar="مركز الألعاب" data-en="Game Center"></a><a href="/media" data-ku="میدیا و ڕیڤیو" data-ar="الإعلام والمراجعات" data-en="Media & Reviews"></a><a href="/ai" data-ku="زیرەکی ئۆتۆمبێل" data-ar="ذكاء السيارات" data-en="ZEBAZ AI"></a><a href="/#contact" data-ku="پەیوەندی" data-ar="تواصل معنا" data-en="Contact"></a><a href="/admin" data-ku="بەڕێوەبەر" data-ar="الإدارة" data-en="Admin"></a></nav><div class="z-menu-langs"><button data-lang="ku">کوردی</button><button data-lang="ar">ع</button><button data-lang="en">EN</button></div><div class="z-theme-wrap"><span class="z-theme-label" data-ku="ڕووکار" data-ar="المظهر" data-en="Appearance"></span><div class="z-theme-modes"><button data-theme-mode="system"><span class="z-theme-icon">A</span><span data-ku="خۆکار" data-ar="تلقائي" data-en="Auto"></span></button><button data-theme-mode="dark"><span class="z-theme-icon">●</span><span data-ku="تاریک" data-ar="داكن" data-en="Dark"></span></button><button data-theme-mode="light"><span class="z-theme-icon">☀</span><span data-ku="ڕووناک" data-ar="فاتح" data-en="Light"></span></button></div></div></aside>`;
+    shell.innerHTML=`<button class="z-menu-btn" aria-label="Menu"><span></span><span></span><span></span></button><div class="z-menu-backdrop"></div><aside class="z-menu-drawer"><div class="z-menu-head"><a href="/"><img src="/zebaz-logo.svg" alt="ZEBAZ"></a><button class="z-menu-close">×</button></div><nav class="z-menu-links"><a href="/" data-ku="سەرەکی" data-ar="الرئيسية" data-en="Home"></a><a href="/ppf" data-ku="PPF و حجز" data-ar="PPF والحجز" data-en="PPF & Booking"></a><a href="/studio" data-ku="ستودیۆ" data-ar="الاستوديو" data-en="Studio"></a><a href="/fb-oil" data-ku="FB Oil" data-ar="FB Oil" data-en="FB Oil"></a><a href="/carwash" data-ku="شۆردنگەی ئۆتۆمبێل" data-ar="غسيل السيارات" data-en="Car Wash"></a><a href="/game-center" data-ku="ناوەندی یاری" data-ar="مركز الألعاب" data-en="Game Center"></a><a href="/media" data-ku="میدیا و ڕیڤیو" data-ar="الإعلام والمراجعات" data-en="Media & Reviews"></a><a href="/ai" data-ku="زیرەکی ئۆتۆمبێل" data-ar="ذكاء السيارات" data-en="ZEBAZ AI"></a><a href="/#contact" data-ku="پەیوەندی" data-ar="تواصل معنا" data-en="Contact"></a><a href="/admin" data-ku="بەڕێوەبەر" data-ar="الإدارة" data-en="Admin"></a></nav><div class="z-menu-langs"><button data-lang="ku">کوردی</button><button data-lang="ar">ع</button><button data-lang="en">EN</button></div></aside>`;
     document.body.appendChild(shell);
     const btn=shell.querySelector('.z-menu-btn'),back=shell.querySelector('.z-menu-backdrop'),close=shell.querySelector('.z-menu-close');
     const toggle=on=>{shell.classList.toggle('open',on);document.body.classList.toggle('z-menu-open',on)};
     btn.onclick=()=>toggle(!shell.classList.contains('open'));back.onclick=()=>toggle(false);close.onclick=()=>toggle(false);
     shell.querySelectorAll('.z-menu-links a').forEach(a=>{const ap=new URL(a.href,location.origin).pathname.replace(/\/+$/,'')||'/';if(ap===path)a.classList.add('current');a.addEventListener('click',()=>toggle(false))});
-    shell.querySelectorAll('[data-theme-mode]').forEach(b=>b.addEventListener('click',()=>applyTheme(b.dataset.themeMode,true)));
-    applyTheme(getTheme(),false);
     if(path!=='/'&&!document.querySelector('.z-back-home')){const a=document.createElement('a');a.href='/';a.className='z-back-home';a.setAttribute('data-ku','← گەڕانەوە بۆ سەرەکی');a.setAttribute('data-ar','← العودة للرئيسية');a.setAttribute('data-en','← Back to Home');document.body.appendChild(a)}
   }
 
