@@ -1,0 +1,34 @@
+{
+  "name": "ZEBAZ Group",
+  "short_name": "ZEBAZ",
+  "description": "ZEBAZ Group — automotive services, PPF, studio, FB Oil, car wash, game center and ZEBAZ AI.",
+  "id": "/",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "background_color": "#050505",
+  "theme_color": "#050505",
+  "orientation": "portrait-primary",
+  "lang": "ku",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "/zebaz-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/zebaz-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {"name":"ZEBAZ AI","short_name":"AI","url":"/ai","icons":[{"src":"/zebaz-logo.svg","sizes":"any","type":"image/svg+xml"}]},
+    {"name":"PPF Booking","short_name":"PPF","url":"/ppf","icons":[{"src":"/zebaz-logo.svg","sizes":"any","type":"image/svg+xml"}]},
+    {"name":"Studio","short_name":"Studio","url":"/studio","icons":[{"src":"/zebaz-logo.svg","sizes":"any","type":"image/svg+xml"}]}
+  ]
+}
