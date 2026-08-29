@@ -12,6 +12,7 @@ COPY package*.json ./
 RUN npm install --omit=dev
 COPY . .
 RUN cat public/chat-fix.js >> public/site.js
+RUN node patch-ai-booking.mjs
 
 ENV NODE_ENV=production
 CMD ["npm", "start"]
