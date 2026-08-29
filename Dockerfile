@@ -11,7 +11,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install --omit=dev
 COPY . .
-RUN cat public/chat-fix.js public/pwa.js public/cars-nav.js public/cars-premium.js public/car-catalog.js public/cars-app.js >> public/site.js
+RUN cat public/chat-fix.js public/pwa.js public/cars-nav.js public/cars-premium.js public/car-catalog.js public/cars-app.js public/cars-pro.js >> public/site.js
 RUN node patch-ai-booking.mjs
 RUN node patch-admin-ai.mjs
 RUN node patch-marketplace.mjs
