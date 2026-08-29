@@ -9,6 +9,7 @@ const __filename=fileURLToPath(import.meta.url);
 const __dirname=path.dirname(__filename);
 const app=express();
 
+app.get('/health',(req,res)=>res.status(200).send('ok'));
 app.set('trust proxy',1);
 app.use((req,res,next)=>{
   const proto=String(req.headers['x-forwarded-proto']||req.protocol||'').split(',')[0].trim().toLowerCase();
