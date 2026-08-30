@@ -1,4 +1,4 @@
-const CACHE='zebaz-app-v4';
+const CACHE='zebaz-app-v5';
 const CORE=['/zebaz-logo.svg','/manifest.webmanifest'];
 
 self.addEventListener('install',event=>{
@@ -19,7 +19,6 @@ self.addEventListener('fetch',event=>{
   const url=new URL(req.url);
   if(url.origin!==location.origin)return;
 
-  // Dynamic/database routes and car photos should use normal browser/network caching.
   if(
     url.pathname.startsWith('/api/') ||
     url.pathname.startsWith('/admin') ||
@@ -28,7 +27,6 @@ self.addEventListener('fetch',event=>{
     url.pathname==='/send-booking'
   ) return;
 
-  // Pages: network first so new deploys appear immediately; cache only as offline fallback.
   if(req.mode==='navigate'){
     event.respondWith(
       fetch(req,{cache:'no-store'})
@@ -38,7 +36,6 @@ self.addEventListener('fetch',event=>{
     return;
   }
 
-  // JS/CSS: network first. This prevents an old site.js from fighting with a newly deployed page.
   if(/\.(?:js|css)$/i.test(url.pathname)){
     event.respondWith(
       fetch(req,{cache:'no-store'})
@@ -48,7 +45,6 @@ self.addEventListener('fetch',event=>{
     return;
   }
 
-  // Small static assets: cache first with background refresh.
   event.respondWith(caches.match(req).then(hit=>{
     const network=fetch(req).then(res=>{
       if(res.ok){const copy=res.clone();caches.open(CACHE).then(c=>c.put(req,copy))}
