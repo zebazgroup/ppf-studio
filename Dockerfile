@@ -18,6 +18,7 @@ RUN node patch-marketplace.mjs
 RUN node patch-marketplace-optional-year.mjs
 RUN node patch-cars-performance.mjs
 RUN node patch-cars-fast-api.mjs
+RUN node patch-cars-inline-bootstrap.mjs
 RUN node patch-admin-marketplace.mjs
 RUN node patch-booking-media.mjs
 
