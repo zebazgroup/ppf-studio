@@ -16,6 +16,7 @@ RUN node patch-ai-booking.mjs
 RUN node patch-admin-ai.mjs
 RUN node patch-marketplace.mjs
 RUN node patch-marketplace-optional-year.mjs
+RUN node patch-cars-performance.mjs
 RUN node patch-admin-marketplace.mjs
 RUN node patch-booking-media.mjs
 
