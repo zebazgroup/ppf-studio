@@ -4,8 +4,8 @@ import { readFile, writeFile } from 'fs/promises';
 {
   const file='public/cars.html';
   let src=await readFile(file,'utf8');
-  src=src.replace(/\/cars-v4-fix\.css\?v=\d+/g,'/cars-v4-fix.css?v=4');
-  if(!src.includes('/cars-v4-fix.css?v=4')) src=src.replace('</head>','<link rel="stylesheet" href="/cars-v4-fix.css?v=4"></head>');
+  src=src.replace(/\/cars-v4-fix\.css\?v=\d+/g,'/cars-v4-fix.css?v=5');
+  if(!src.includes('/cars-v4-fix.css?v=5')) src=src.replace('</head>','<link rel="stylesheet" href="/cars-v4-fix.css?v=5"></head>');
   src=src.replace(/<link rel="stylesheet" href="\/cars-brand-more\.css\?v=\d+">/g,'');
   src=src.replace('</head>','<link rel="stylesheet" href="/cars-brand-more.css?v=1"></head>');
   src=src.replace(/\/cars-v4\.js\?v=\d+/g,'/cars-v4.js?v=7');
@@ -22,12 +22,12 @@ import { readFile, writeFile } from 'fs/promises';
   await writeFile(file,src);
 }
 
-// Rotate the PWA cache so installed-app and normal browser users receive the new Cars UI immediately.
+// Rotate the PWA cache so installed-app and normal browser users receive the mobile no-zoom UI immediately.
 {
   const file='public/sw.js';
   let src=await readFile(file,'utf8');
-  src=src.replace(/const CACHE='zebaz-app-v\d+';/,"const CACHE='zebaz-app-v8';");
+  src=src.replace(/const CACHE='zebaz-app-v\d+';/,"const CACHE='zebaz-app-v9';");
   await writeFile(file,src);
 }
 
-console.log('ZEBAZ Cars one-row brands, gold frames and cache refresh loaded');
+console.log('ZEBAZ Cars mobile no-zoom, gold frames and cache refresh loaded');
