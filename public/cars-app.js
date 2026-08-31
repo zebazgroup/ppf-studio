@@ -1,4 +1,5 @@
 (()=>{
+  if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js',{scope:'/'}).catch(()=>{}));
   const isStandalone=()=>window.matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
   const isCars=()=>/^\/cars\/?$/.test(location.pathname);
   if(isStandalone()&&!isCars()){
@@ -14,9 +15,9 @@
   const lang=()=>window.ZebazLang?.get?.()||localStorage.getItem('zebaz_lang')||'ku';
   const copy=()=>{
     const l=lang();
-    if(l==='ar')return{cars:'السيارات',newCars:'جديدة',used:'مستعملة',brands:'الماركات',search:'بحث',sell:'بيع',top:'أعلى',install:'تثبيت التطبيق',installTitle:'ZEBAZ Cars',ios:'على iPhone: اضغط مشاركة ثم Add to Home Screen.',android:'ثبّت ZEBAZ Cars لفتحه كتطبيق مستقل.',close:'إغلاق'};
-    if(l==='en')return{cars:'Cars',newCars:'New',used:'Used',brands:'Brands',search:'Search',sell:'Sell',top:'Top',install:'Install App',installTitle:'ZEBAZ Cars',ios:'On iPhone: tap Share, then Add to Home Screen.',android:'Install ZEBAZ Cars to open it as a standalone app.',close:'Close'};
-    return{cars:'ئۆتۆمبێل',newCars:'نوێ',used:'بەکارهاتوو',brands:'مارکەکان',search:'گەڕان',sell:'فرۆشتن',top:'سەرەوە',install:'دامەزراندنی ئەپ',installTitle:'ZEBAZ Cars',ios:'لە iPhone: Share بکە، پاشان Add to Home Screen هەڵبژێرە.',android:'ZEBAZ Cars دابمەزرێنە تا وەک ئەپێکی سەربەخۆ بیکەیتەوە.',close:'داخستن'};
+    if(l==='ar')return{cars:'السيارات',newCars:'جديدة',used:'مستعملة',brands:'الماركات',search:'بحث',sell:'بيع',top:'أعلى',install:'تثبيت التطبيق',installTitle:'ZEBAZ Motors',ios:'على iPhone: اضغط مشاركة ثم Add to Home Screen.',android:'ثبّت ZEBAZ Motors لفتحه كتطبيق مستقل.',close:'إغلاق'};
+    if(l==='en')return{cars:'Cars',newCars:'New',used:'Used',brands:'Brands',search:'Search',sell:'Sell',top:'Top',install:'Install App',installTitle:'ZEBAZ Motors',ios:'On iPhone: tap Share, then Add to Home Screen.',android:'Install ZEBAZ Motors to open it as a standalone app.',close:'Close'};
+    return{cars:'ئۆتۆمبێل',newCars:'نوێ',used:'بەکارهاتوو',brands:'مارکەکان',search:'گەڕان',sell:'فرۆشتن',top:'سەرەوە',install:'دامەزراندنی ئەپ',installTitle:'ZEBAZ Motors',ios:'لە iPhone: Share بکە، پاشان Add to Home Screen هەڵبژێرە.',android:'ZEBAZ Motors دابمەزرێنە تا وەک ئەپێکی سەربەخۆ بیکەیتەوە.',close:'داخستن'};
   };
 
   function style(){
@@ -30,8 +31,8 @@
   }
 
   function updateMeta(){
-    document.title='ZEBAZ Cars';
-    let a=document.head.querySelector('meta[name="apple-mobile-web-app-title"]');if(!a){a=document.createElement('meta');a.name='apple-mobile-web-app-title';document.head.appendChild(a)}a.content='ZEBAZ Cars';
+    document.title='ZEBAZ Motors';
+    let a=document.head.querySelector('meta[name="apple-mobile-web-app-title"]');if(!a){a=document.createElement('meta');a.name='apple-mobile-web-app-title';document.head.appendChild(a)}a.content='ZEBAZ Motors';
     let t=document.head.querySelector('meta[name="theme-color"]');if(t)t.content='#ffffff';
   }
 

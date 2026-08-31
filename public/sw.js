@@ -1,5 +1,5 @@
-const CACHE='zebaz-app-v5';
-const CORE=['/zebaz-logo.svg','/manifest.webmanifest'];
+const CACHE='zebaz-motors-v1';
+const CORE=['/cars','/offline.html','/manifest.webmanifest','/icons/zebaz-motors-192.png','/icons/zebaz-motors-512.png'];
 
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()));
@@ -31,7 +31,7 @@ self.addEventListener('fetch',event=>{
     event.respondWith(
       fetch(req,{cache:'no-store'})
         .then(res=>{if(res.ok){const copy=res.clone();caches.open(CACHE).then(c=>c.put(req,copy))}return res})
-        .catch(()=>caches.match(req).then(x=>x||caches.match('/cars')||caches.match('/')))
+        .catch(()=>caches.match(req).then(x=>x||caches.match('/cars')||caches.match('/offline.html')))
     );
     return;
   }

@@ -1,8 +1,8 @@
 {
-  "name": "ZEBAZ Cars",
-  "short_name": "ZEBAZ Cars",
-  "description": "ZEBAZ Cars — buy and sell cars in Kurdistan and Iraq with smart search and AI photo presentation.",
-  "id": "/cars-app",
+  "name": "ZEBAZ Motors",
+  "short_name": "ZEBAZ Motors",
+  "description": "ZEBAZ Motors — buy, sell and compare cars in Kurdistan and Iraq.",
+  "id": "/cars",
   "start_url": "/cars/?source=pwa",
   "scope": "/",
   "display": "standalone",
@@ -14,21 +14,21 @@
   "dir": "rtl",
   "icons": [
     {
-      "src": "/zebaz-logo.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "/icons/zebaz-motors-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/zebaz-logo.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "/icons/zebaz-motors-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "maskable"
     }
   ],
   "shortcuts": [
-    {"name":"Cars","short_name":"Cars","url":"/cars/","icons":[{"src":"/zebaz-logo.svg","sizes":"any","type":"image/svg+xml"}]},
-    {"name":"Sell Car","short_name":"Sell","url":"/cars/?sell=1","icons":[{"src":"/zebaz-logo.svg","sizes":"any","type":"image/svg+xml"}]},
-    {"name":"Search Cars","short_name":"Search","url":"/cars/#cars","icons":[{"src":"/zebaz-logo.svg","sizes":"any","type":"image/svg+xml"}]}
+    {"name":"Cars","short_name":"Cars","url":"/cars/"},
+    {"name":"Sell Car","short_name":"Sell","url":"/cars/?sell=1"},
+    {"name":"Search Cars","short_name":"Search","url":"/cars/#listings"}
   ]
 }
