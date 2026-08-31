@@ -10,73 +10,101 @@ if (!makes.length) throw new Error('No car makes found in catalog');
 
 await mkdir('public/brands', { recursive: true });
 
-const normalize = value => String(value || '')
-  .toLowerCase()
-  .normalize('NFKD')
-  .replace(/[&+]/g, 'and')
-  .replace(/[^a-z0-9]+/g, '');
-const fileSlug = value => String(value || '')
-  .toLowerCase()
-  .normalize('NFKD')
-  .replace(/[&+]/g, 'and')
-  .replace(/[^a-z0-9]+/g, '-')
-  .replace(/^-+|-+$/g, '') || 'brand';
-const esc = value => String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[ch]));
+const DATASET_COMMIT='3f0929e70e0a9a2a502063edc4b3e5c0146cba74';
+const DATASET_BASE=`https://raw.githubusercontent.com/vehiclespecs/brand-logos/${DATASET_COMMIT}`;
+const normalize=value=>String(value||'').toLowerCase().normalize('NFKD').replace(/[&+]/g,'and').replace(/[^a-z0-9]+/g,'');
+const fileSlug=value=>String(value||'').toLowerCase().normalize('NFKD').replace(/[&+]/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')||'brand';
 
-const icons = Object.values(SimpleIcons).filter(icon => icon && typeof icon === 'object' && icon.title && icon.path && typeof icon.path === 'string');
-const byTitle = new Map(icons.map(icon => [normalize(icon.title), icon]));
-
-const aliases = {
-  'Alfa Romeo':['Alfa Romeo'], 'Aston Martin':['Aston Martin'], 'BAIC':['BAIC Motor','BAIC'],
-  'BYD':['BYD'], 'Changan':['Changan Automobile','Changan'], 'Chery':['Chery'], 'Chevrolet':['Chevrolet'],
-  'Citroen':['Citroën','Citroen'], 'Cupra':['CUPRA','Cupra'], 'Denza':['Denza'], 'Dongfeng':['Dongfeng Motor','Dongfeng'],
-  'Fangchengbao':['Fangchengbao'], 'GAC':['GAC Motor','GAC'], 'Geely':['Geely'], 'Genesis':['Genesis'],
-  'Great Wall':['Great Wall Motor','Great Wall'], 'Hongqi':['Hongqi'], 'Infiniti':['INFINITI','Infiniti'], 'JAC':['JAC Motors','JAC'],
-  'Jaecoo':['Jaecoo'], 'Jetour':['Jetour'], 'KGM':['KG Mobility','KGM'], 'Land Rover':['Land Rover'],
-  'Li Auto':['Li Auto'], 'Mahindra':['Mahindra'], 'Mercedes-Benz':['Mercedes-Benz','Mercedes Benz','Mercedes'], 'MG':['MG'],
-  'Mini':['MINI','Mini'], 'NIO':['NIO'], 'Omoda':['Omoda'], 'Ram':['RAM','Ram'], 'Rolls-Royce':['Rolls-Royce','Rolls Royce'],
-  'Seat':['SEAT','Seat'], 'Skoda':['ŠKODA','Škoda','Skoda'], 'Smart':['smart','Smart'], 'Tank':['Tank'], 'XPeng':['XPeng','Xpeng'],
-  'Zeekr':['Zeekr'], 'Haval':['Haval'], 'GMC':['GMC'], 'Jeep':['Jeep']
+const icons=Object.values(SimpleIcons).filter(icon=>icon&&typeof icon==='object'&&icon.title&&icon.path&&typeof icon.path==='string');
+const byTitle=new Map(icons.map(icon=>[normalize(icon.title),icon]));
+const simpleAliases={
+  'Alfa Romeo':['Alfa Romeo'],'Aston Martin':['Aston Martin'],'BAIC':['BAIC Motor','BAIC'],'Changan':['Changan Automobile','Changan'],
+  'Citroen':['Citroën','Citroen'],'Dongfeng':['Dongfeng Motor','Dongfeng'],'Fangchengbao':['Fangchengbao'],'GAC':['GAC Motor','GAC'],
+  'Great Wall':['Great Wall Motor','Great Wall'],'KGM':['KG Mobility','KGM'],'Land Rover':['Land Rover'],'Li Auto':['Li Auto'],
+  'Mercedes-Benz':['Mercedes-Benz','Mercedes Benz','Mercedes'],'Ram':['RAM','Ram'],'Rolls-Royce':['Rolls-Royce','Rolls Royce'],
+  'Tank':['Tank'],'XPeng':['XPeng','Xpeng'],'Exeed':['Exeed']
+};
+const datasetAliases={
+  'Changan':'changan','Dongfeng':'dongfeng','Ram':'ram','XPeng':'xpeng','Citroen':'citroen','Mercedes-Benz':'mercedes-benz',
+  'Rolls-Royce':'rolls-royce','Land Rover':'land-rover','Great Wall':'great-wall','Alfa Romeo':'alfa-romeo','Aston Martin':'aston-martin'
+};
+const officialDomains={
+  'Exeed':'exeedinternational.com','Fangchengbao':'fangchengbao.com','GAC':'gacmotor.com','Li Auto':'lixiang.com','Tank':'tankglobal.com'
 };
 
-function findIcon(make) {
-  const candidates = [make, ...(aliases[make] || [])];
-  for (const candidate of candidates) {
-    const exact = byTitle.get(normalize(candidate));
-    if (exact) return exact;
+function findSimpleIcon(make){
+  for(const candidate of [make,...(simpleAliases[make]||[])]){
+    const icon=byTitle.get(normalize(candidate));
+    if(icon)return icon;
   }
-  // Never fuzzy-match here: a wrong car logo is worse than a clean branded wordmark fallback.
   return null;
 }
-
-function iconSvg(icon) {
-  const color = String(icon.hex || '111111').replace('#','');
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#${color}" d="${icon.path}"/></svg>`;
+function iconSvg(icon){
+  const color=String(icon.hex||'111111').replace('#','');
+  return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#${color}" d="${icon.path}"/></svg>`);
+}
+function genericVehicleSvg(){
+  return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 256"><g fill="none" stroke="#b9954f" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"><path d="M58 157h204l-17-51c-5-15-18-25-34-25H109c-16 0-29 10-34 25l-17 51Z"/><path d="M77 157v30m166-30v30M94 187h132"/><circle cx="94" cy="184" r="17" fill="#111" stroke="#b9954f"/><circle cx="226" cy="184" r="17" fill="#111" stroke="#b9954f"/></g></svg>`);
+}
+async function fetchBuffer(url,timeout=7000){
+  try{
+    const r=await fetch(url,{signal:AbortSignal.timeout(timeout),headers:{'user-agent':'ZEBAZ-Cars-logo-builder/1.0'}});
+    if(!r.ok)return null;
+    const ab=await r.arrayBuffer();
+    return ab.byteLength?Buffer.from(ab):null;
+  }catch{return null}
+}
+async function datasetLogo(make){
+  const slug=datasetAliases[make]||fileSlug(make);
+  for(const ext of ['svg','png']){
+    const url=`${DATASET_BASE}/${slug}-logo.${ext}`;
+    const buf=await fetchBuffer(url);
+    if(buf)return{buffer:buf,source:`vehiclespecs-${ext}`,url};
+  }
+  return null;
+}
+async function domainLogo(make){
+  const domain=officialDomains[make];
+  if(!domain)return null;
+  const url=`https://www.google.com/s2/favicons?domain_url=https://${domain}&sz=256`;
+  const buffer=await fetchBuffer(url);
+  return buffer?{buffer,source:'official-domain-icon',url}:null;
+}
+async function pngFrom(buffer){
+  return sharp(buffer,{failOn:'none',density:320})
+    .resize(320,256,{fit:'contain',background:{r:0,g:0,b:0,alpha:0},withoutEnlargement:false})
+    .png({compressionLevel:9,adaptiveFiltering:true})
+    .toBuffer();
 }
 
-function wordmarkSvg(make) {
-  const label = esc(make);
-  const len = [...make].length;
-  const size = len > 16 ? 25 : len > 12 ? 30 : len > 9 ? 36 : len > 6 ? 43 : 52;
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="320" height="256" viewBox="0 0 320 256">
-    <rect width="320" height="256" fill="none"/>
-    <text x="160" y="132" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans,Arial,Helvetica,sans-serif" font-size="${size}" font-weight="800" letter-spacing="-1" fill="#111111">${label}</text>
-  </svg>`;
+const manifest={};
+let actualCount=0,genericCount=0;
+async function buildMake(make){
+  const filename=`${fileSlug(make)}.png`;
+  let picked=null;
+  if(make!=='Other')picked=await datasetLogo(make);
+  if(!picked&&make!=='Other'){
+    const icon=findSimpleIcon(make);
+    if(icon)picked={buffer:iconSvg(icon),source:'simple-icons',title:icon.title};
+  }
+  if(!picked&&make!=='Other')picked=await domainLogo(make);
+  if(!picked){picked={buffer:genericVehicleSvg(),source:'generic-vehicle'};genericCount++}else actualCount++;
+  const out=await pngFrom(picked.buffer);
+  await writeFile(`public/brands/${filename}`,out);
+  manifest[make]={file:`/brands/${filename}`,source:picked.source,title:picked.title||make,sourceUrl:picked.url||null};
 }
 
-const manifest = {};
-let officialCount = 0;
-for (const make of makes) {
-  const icon = findIcon(make);
-  const filename = `${fileSlug(make)}.png`;
-  const svg = icon ? iconSvg(icon) : wordmarkSvg(make);
-  await sharp(Buffer.from(svg))
-    .resize(320, 256, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
-    .png({ compressionLevel: 9, adaptiveFiltering: true })
-    .toFile(`public/brands/${filename}`);
-  manifest[make] = { file: `/brands/${filename}`, source: icon ? 'simple-icons' : 'wordmark-fallback', title: icon?.title || make };
-  if (icon) officialCount++;
-}
+// Limit concurrent external downloads so the Railway build remains stable.
+let cursor=0;
+const workers=Array.from({length:8},async()=>{
+  while(true){
+    const i=cursor++;
+    if(i>=makes.length)return;
+    await buildMake(makes[i]);
+  }
+});
+await Promise.all(workers);
 
-await writeFile('public/brands/manifest.json', JSON.stringify({ generatedAt: new Date().toISOString(), total: makes.length, officialCount, brands: manifest }, null, 2));
-console.log(`ZEBAZ brand PNGs generated: ${makes.length} total, ${officialCount} exact icon matches, ${makes.length - officialCount} wordmark fallbacks`);
+await writeFile('public/brands/manifest.json',JSON.stringify({generatedAt:new Date().toISOString(),total:makes.length,actualCount,genericCount,datasetCommit:DATASET_COMMIT,brands:manifest},null,2));
+if(actualCount<Math.min(78,makes.length-1))throw new Error(`Too few real brand logos generated: ${actualCount}/${makes.length}`);
+console.log(`ZEBAZ real brand PNGs generated: ${makes.length} total, ${actualCount} real logos, ${genericCount} generic fallback`);
