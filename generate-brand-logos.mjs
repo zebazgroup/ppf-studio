@@ -28,6 +28,9 @@ const datasetAliases={
   'Changan':'changan','Dongfeng':'dongfeng','Ram':'ram','XPeng':'xpeng','Citroen':'citroen','Mercedes-Benz':'mercedes-benz',
   'Rolls-Royce':'rolls-royce','Land Rover':'land-rover','Great Wall':'great-wall','Alfa Romeo':'alfa-romeo','Aston Martin':'aston-martin'
 };
+const directAssets={
+  'Exeed':'https://commons.wikimedia.org/wiki/Special:Redirect/file/Exeed_logo.png'
+};
 const officialDomains={
   'Exeed':'exeedinternational.com','Fangchengbao':'fangchengbao.com','GAC':'gacmotor.com','Li Auto':'lixiang.com','Tank':'tankglobal.com'
 };
@@ -63,6 +66,11 @@ async function datasetLogo(make){
   }
   return null;
 }
+async function directLogo(make){
+  const url=directAssets[make];if(!url)return null;
+  const buffer=await fetchBuffer(url);
+  return buffer?{buffer,source:'official-published-logo',url}:null;
+}
 async function domainLogo(make){
   const domain=officialDomains[make];
   if(!domain)return null;
@@ -83,6 +91,7 @@ async function buildMake(make){
   const filename=`${fileSlug(make)}.png`;
   let picked=null;
   if(make!=='Other')picked=await datasetLogo(make);
+  if(!picked&&make!=='Other')picked=await directLogo(make);
   if(!picked&&make!=='Other'){
     const icon=findSimpleIcon(make);
     if(icon)picked={buffer:iconSvg(icon),source:'simple-icons',title:icon.title};
@@ -94,7 +103,6 @@ async function buildMake(make){
   manifest[make]={file:`/brands/${filename}`,source:picked.source,title:picked.title||make,sourceUrl:picked.url||null};
 }
 
-// Limit concurrent external downloads so the Railway build remains stable.
 let cursor=0;
 const workers=Array.from({length:8},async()=>{
   while(true){
@@ -106,5 +114,5 @@ const workers=Array.from({length:8},async()=>{
 await Promise.all(workers);
 
 await writeFile('public/brands/manifest.json',JSON.stringify({generatedAt:new Date().toISOString(),total:makes.length,actualCount,genericCount,datasetCommit:DATASET_COMMIT,brands:manifest},null,2));
-if(actualCount<Math.min(78,makes.length-1))throw new Error(`Too few real brand logos generated: ${actualCount}/${makes.length}`);
+if(actualCount<Math.min(83,makes.length-1))throw new Error(`Too few real brand logos generated: ${actualCount}/${makes.length}`);
 console.log(`ZEBAZ real brand PNGs generated: ${makes.length} total, ${actualCount} real logos, ${genericCount} generic fallback`);
