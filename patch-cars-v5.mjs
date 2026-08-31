@@ -11,7 +11,7 @@ import { readFile, writeFile } from 'fs/promises';
 {
   const file='public/sw.js';
   let src=await readFile(file,'utf8');
-  src=src.replace(/const CACHE='zebaz-app-v\d+';/,"const CACHE='zebaz-app-v8';");
+  src=src.replace(/const CACHE='zebaz-app-v\d+';/,"const CACHE='zebaz-app-v9';");
   await writeFile(file,src);
 }
 
