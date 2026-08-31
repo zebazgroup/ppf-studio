@@ -21,8 +21,11 @@
   .v5-compare-go{height:36px!important}
 }
 
-/* Use the native black logo in light mode and invert it in dark mode. */
-.c-logo,
-html[data-cars-theme="light"] .c-logo{filter:none!important}
-html[data-theme="dark"] .c-logo,
-html[data-cars-theme="dark"] .c-logo{filter:invert(1)!important}
+/* Use dedicated transparent logo assets instead of recoloring one image. */
+.c-logo-switch{display:grid;align-items:center}
+.c-logo-switch .c-logo{grid-area:1/1;filter:none!important}
+.c-logo-switch .c-logo-dark{display:none!important}
+html[data-theme="dark"] .c-logo-switch .c-logo-light,
+html[data-cars-theme="dark"] .c-logo-switch .c-logo-light{display:none!important}
+html[data-theme="dark"] .c-logo-switch .c-logo-dark,
+html[data-cars-theme="dark"] .c-logo-switch .c-logo-dark{display:block!important}
