@@ -26,3 +26,25 @@ body.zc-v2{min-height:100vh;transition:background .25s ease,color .25s ease}
 @media(max-width:1180px){.c-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}.c-brand-v4{min-width:130px!important;width:130px!important}}
 @media(max-width:840px){.c-top-in{height:64px!important}.c-logo{width:112px!important;height:34px!important}.c-actions .c-city-btn,.c-actions #topSearch,.c-logo-sub{display:none!important}.c-theme-select{height:38px;width:92px;padding-inline:9px;font-size:9px}.c-theme-icon{display:none}.c-hero{padding-top:10px!important}.c-search{border-radius:18px!important}.c-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}.c-card{border-radius:15px!important}.c-card-body{padding:11px!important}.c-card h3{font-size:12px!important}.c-price{font-size:15px!important}.c-meta span{font-size:8px!important}.c-brand-tools{align-items:stretch;flex-direction:column}.c-brand-search{width:100%}.c-brand-v4{min-width:116px!important;width:116px!important;min-height:118px!important}.c-brand-logo-shell{width:74px!important;height:68px!important}.c-brand-logo{width:58px!important;height:58px!important;max-width:58px!important;max-height:58px!important}.v4-studio-card{grid-template-columns:auto 1fr}.v4-ready{grid-column:1/-1;justify-self:start}.v4-compare-cars,.v4-studio-grid{grid-template-columns:1fr}.v4-spin{height:46vh}.c-sheet{border-radius:20px 20px 0 0!important}}
 @media(max-width:520px){.c-wrap{width:min(96%,1480px)!important}.c-grid{gap:8px!important}.c-photo{aspect-ratio:1/1!important}.c-card-body{padding:10px 9px!important}.c-card-foot{gap:4px!important}.c-city{font-size:8px!important}.c-price{font-size:14px!important}.c-brand-rail{gap:9px!important}.c-brand-v4{min-width:108px!important;width:108px!important;min-height:112px!important}.c-brand-logo-shell{width:68px!important;height:64px!important}.c-brand-logo{width:54px!important;height:54px!important;max-width:54px!important;max-height:54px!important}.v4-compare-panel,.v4-studio-panel{padding:14px;border-radius:20px}.v4-ai-result{font-size:12px;padding:13px}.v4-spin{height:40vh}}
+/* Keep entered values readable when a Cars form is focused or browser-autofilled in dark mode. */
+html[data-cars-theme="dark"] .c-field input,
+html[data-cars-theme="dark"] .c-field select,
+html[data-cars-theme="dark"] .c-field textarea,
+html[data-cars-theme="dark"] .c-field input:focus,
+html[data-cars-theme="dark"] .c-field select:focus,
+html[data-cars-theme="dark"] .c-field textarea:focus{
+  background:#171b21!important;
+  color:#f4f6f8!important;
+  caret-color:#f4f6f8!important;
+  border-color:#343b45!important;
+}
+html[data-cars-theme="dark"] .c-field input::placeholder,
+html[data-cars-theme="dark"] .c-field textarea::placeholder{color:#8f98a4!important;opacity:1}
+html[data-cars-theme="dark"] .c-field input:-webkit-autofill,
+html[data-cars-theme="dark"] .c-field input:-webkit-autofill:hover,
+html[data-cars-theme="dark"] .c-field input:-webkit-autofill:focus{
+  -webkit-text-fill-color:#f4f6f8!important;
+  caret-color:#f4f6f8!important;
+  -webkit-box-shadow:0 0 0 1000px #171b21 inset!important;
+  box-shadow:0 0 0 1000px #171b21 inset!important;
+}
