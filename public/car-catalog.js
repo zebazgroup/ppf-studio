@@ -90,6 +90,20 @@
   };
 
   const BRAND_NAMES=Object.keys(CATALOG).sort((a,b)=>a.localeCompare(b));
+  const TRIMS={
+    'Jeep|Grand Cherokee':['Laredo','Altitude','Limited','Overland','Summit','Summit Reserve','Trailhawk','SRT','Trackhawk'],
+    'Jeep|Grand Cherokee L':['Laredo','Altitude','Limited','Overland','Summit','Summit Reserve'],
+    'Jeep|Wrangler':['Sport','Sport S','Willys','Sahara','Rubicon','Rubicon X','High Altitude','392'],
+    'Jeep|Gladiator':['Sport','Sport S','Willys','Mojave','Rubicon','High Altitude'],
+    'Jeep|Compass':['Sport','Latitude','Altitude','Limited','Trailhawk'],
+    'Toyota|Land Cruiser':['GX','GXR','VX','VXR','GR Sport','ZX'],
+    'Toyota|Land Cruiser Prado':['TX','TXL','VX','VXL','Adventure'],
+    'Toyota|RAV4':['LE','XLE','XLE Premium','Adventure','Limited','TRD Off-Road','Hybrid'],
+    'Ford|F-150':['XL','XLT','Lariat','King Ranch','Platinum','Limited','Tremor','Raptor'],
+    'GMC|Yukon':['SLE','SLT','AT4','Denali','Denali Ultimate'],
+    'Nissan|Patrol':['XE','SE T2','SE Titanium','LE T1','LE T2','LE Titanium','Nismo']
+  };
+  const DEFAULT_TRIMS=['Base','Standard','Sport','Premium','Luxury','Limited','Off-Road','Other'];
   const $=id=>document.getElementById(id);
   const lang=()=>window.ZebazLang?.get?.()||document.documentElement.lang||'ku';
   const word=(ku,ar,en)=>lang()==='ar'?ar:lang()==='en'?en:ku;
@@ -114,6 +128,29 @@
     if(models.includes(keep))select.value=keep;
   }
 
+  function fillTrims(select,brand,model){
+    if(!select)return;
+    const keep=select.value;
+    select.innerHTML='';
+    const blank=document.createElement('option');blank.value='';blank.textContent=word('تایبەتمەندی هەڵبژێرە','اختر الفئة','Choose trim');select.appendChild(blank);
+    const trims=TRIMS[brand+'|'+model]||DEFAULT_TRIMS;
+    for(const trim of trims){const o=document.createElement('option');o.value=trim;o.textContent=trim;select.appendChild(o)}
+    select.disabled=!brand||!model;
+    if(trims.includes(keep))select.value=keep;
+  }
+
+  function installTrimField(make,model){
+    if($('trim'))return $('trim');
+    const modelField=model.closest('.c-field');
+    if(!modelField)return null;
+    const field=document.createElement('div');field.className='c-field';
+    const label=document.createElement('label');label.dataset.ku='تایبەتمەندی';label.dataset.ar='الفئة';label.dataset.en='Trim';label.textContent=word('تایبەتمەندی','الفئة','Trim');
+    const trim=document.createElement('select');trim.id='trim';trim.required=true;
+    field.append(label,trim);modelField.after(field);
+    fillTrims(trim,make.value,model.value);
+    return trim;
+  }
+
   function replaceInputWithSelect(input,id){
     if(!input||input.tagName==='SELECT')return input;
     const s=document.createElement('select');
@@ -136,7 +173,9 @@
     fillBrands(make);
     fillModels(model,'');
     make.required=true;model.required=true;
-    make.addEventListener('change',()=>fillModels(model,make.value));
+    const trim=installTrimField(make,model);
+    make.addEventListener('change',()=>{fillModels(model,make.value);fillTrims(trim,make.value,'')});
+    model.addEventListener('change',()=>fillTrims(trim,make.value,model.value));
 
     if(year){
       year.required=false;

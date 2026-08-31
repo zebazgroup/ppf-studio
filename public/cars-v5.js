@@ -86,7 +86,7 @@ function installCompareLab(){
 
 async function generateAd(){
   const b=$('#v5AdGenerate'),desc=$('#description');if(!b||!desc)return;
-  const info={make:$('#make')?.value||'',model:$('#model')?.value||'',year:$('#year')?.value||'',price:$('#price')?.value||'',mileage:$('#mileage')?.value||'',city:$('#city')?.value||'',color:$('#color')?.value||'',vin:$('#vin')?.value||'',highlights:$('#v5AdHighlights')?.value||''};
+  const info={make:$('#make')?.value||'',model:$('#model')?.value||'',trim:$('#trim')?.value||'',year:$('#year')?.value||'',price:$('#price')?.value||'',mileage:$('#mileage')?.value||'',city:$('#city')?.value||'',color:$('#color')?.value||'',vin:$('#vin')?.value||'',highlights:$('#v5AdHighlights')?.value||''};
   if(!info.make||!info.model)return toast(tr('سەرەتا مارکە و مۆدێل هەڵبژێرە','اختر الماركة والموديل أولاً','Choose make and model first'));
   b.classList.add('loading');b.textContent=tr('AI دەنووسێت...','AI يكتب...','AI writing...');
   const language=lang()==='ar'?'Arabic':lang()==='en'?'English':'Kurdish Sorani';

@@ -19,6 +19,7 @@ RUN node patch-admin-ai.mjs
 RUN node patch-marketplace.mjs
 RUN node patch-marketplace-optional-year.mjs
 RUN node patch-cars-fast-api.mjs
+RUN node patch-car-trim.mjs
 RUN node patch-admin-marketplace.mjs
 RUN node patch-booking-media.mjs
 RUN node patch-admin-home-slider.mjs
