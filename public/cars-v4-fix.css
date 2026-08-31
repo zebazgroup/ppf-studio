@@ -80,6 +80,20 @@ html[data-theme="light"][data-cars-theme="dark"] .c-brand-v4 small{color:#f0f2f5
 .c-brand-v4.active{border-color:#e71f31!important;box-shadow:0 0 0 2px rgba(231,31,49,.12),0 12px 32px rgba(16,24,40,.08)!important}
 
 @media(max-width:840px){
+  html{-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important}
+  body.zc-v2 input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+  body.zc-v2 select,
+  body.zc-v2 textarea,
+  body.zc-v2 .c-ai-compose input,
+  body.zc-v2 .c-brand-search{
+    font-size:16px!important;
+    line-height:1.25!important;
+    touch-action:manipulation!important;
+  }
+  body.zc-v2 button,
+  body.zc-v2 a,
+  body.zc-v2 .c-brand-v4{touch-action:manipulation!important;-webkit-tap-highlight-color:transparent!important}
+  .c-modal,.c-sheet{overscroll-behavior:contain!important}
   .c-brand-v4{min-width:146px!important;width:146px!important;min-height:142px!important;height:142px!important}
   .c-brand-rail .c-brand-v4 .c-brand-logo-shell{width:100px!important;height:90px!important}
   .c-brand-rail .c-brand-v4 .c-brand-logo{width:82px!important;height:74px!important;max-width:82px!important;max-height:74px!important}
