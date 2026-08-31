@@ -3,13 +3,15 @@
   "version": "1.1.0",
   "private": true,
   "type": "module",
-  "description": "ZEBAZ PPF Studio booking website with PostgreSQL admin database",
+  "description": "ZEBAZ Group website, Cars marketplace, AI Studio and admin control center",
   "main": "server.js",
   "scripts": {"start":"node server.js"},
-  "engines": {"node":">=20"},
+  "engines": {"node":">=20.9.0"},
   "dependencies": {
     "express":"^5.1.0",
     "pino":"^9.7.0",
-    "pg":"^8.16.3"
+    "pg":"^8.16.3",
+    "sharp":"^0.35.4",
+    "simple-icons":"^16.29.0"
   }
 }
