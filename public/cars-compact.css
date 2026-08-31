@@ -20,3 +20,9 @@
   .v5-compare-actions{padding:0 10px 10px;gap:6px}.v5-compare-note{display:none}
   .v5-compare-go{height:36px!important}
 }
+
+/* Keep the white SVG visible in both color themes. */
+.c-logo,
+html[data-cars-theme="light"] .c-logo{filter:brightness(0)!important}
+html[data-theme="dark"] .c-logo,
+html[data-cars-theme="dark"] .c-logo{filter:none!important}
