@@ -128,15 +128,16 @@
     if(models.includes(keep))select.value=keep;
   }
 
-  function fillTrims(select,brand,model){
-    if(!select)return;
-    const keep=select.value;
-    select.innerHTML='';
-    const blank=document.createElement('option');blank.value='';blank.textContent=word('تایبەتمەندی هەڵبژێرە','اختر الفئة','Choose trim');select.appendChild(blank);
+  function fillTrims(input,brand,model){
+    if(!input)return;
+    const list=$('trimSuggestions');
+    if(!list)return;
+    list.innerHTML='';
     const trims=TRIMS[brand+'|'+model]||DEFAULT_TRIMS;
-    for(const trim of trims){const o=document.createElement('option');o.value=trim;o.textContent=trim;select.appendChild(o)}
-    select.disabled=!brand||!model;
-    if(trims.includes(keep))select.value=keep;
+    for(const trim of trims){const o=document.createElement('option');o.value=trim;list.appendChild(o)}
+    input.disabled=!brand||!model;
+    input.placeholder=word('تایبەتمەندی بنووسە یان هەڵبژێرە','اكتب أو اختر الفئة','Type or choose trim');
+    if(!brand||!model)input.value='';
   }
 
   function installTrimField(make,model){
@@ -145,8 +146,9 @@
     if(!modelField)return null;
     const field=document.createElement('div');field.className='c-field';
     const label=document.createElement('label');label.dataset.ku='تایبەتمەندی';label.dataset.ar='الفئة';label.dataset.en='Trim';label.textContent=word('تایبەتمەندی','الفئة','Trim');
-    const trim=document.createElement('select');trim.id='trim';trim.required=true;
-    field.append(label,trim);modelField.after(field);
+    const trim=document.createElement('input');trim.id='trim';trim.required=true;trim.setAttribute('list','trimSuggestions');trim.autocomplete='off';
+    const list=document.createElement('datalist');list.id='trimSuggestions';
+    field.append(label,trim,list);modelField.after(field);
     fillTrims(trim,make.value,model.value);
     return trim;
   }
