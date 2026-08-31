@@ -223,6 +223,18 @@ const compactChatCss=`<style id="zebaz-chat-compact">
 }
 </style>`;
 
+const brandRefreshCss='<link rel="stylesheet" href="/brand-refresh.css">';
+const publicOrigin='https://zebaz.co';
+const escapeMeta=value=>String(value||'').replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+const matchMeta=(html,pattern,fallback='')=>html.match(pattern)?.[1]?.trim()||fallback;
+
+function socialMeta(html,req){
+  const title=matchMeta(html,/<title>([^<]*)<\/title>/i,'ZEBAZ Group');
+  const description=matchMeta(html,/<meta\s+name="description"\s+content="([^"]*)"/i,'ZEBAZ Group in Erbil, Kurdistan.');
+  const canonical=matchMeta(html,/<link\s+rel="canonical"\s+href="([^"]*)"/i,`${publicOrigin}${req.path}`);
+  return `<meta property="og:type" content="website"><meta property="og:site_name" content="ZEBAZ Group"><meta property="og:title" content="${escapeMeta(title)}"><meta property="og:description" content="${escapeMeta(description)}"><meta property="og:url" content="${escapeMeta(canonical)}"><meta property="og:image" content="${publicOrigin}/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="675"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${escapeMeta(title)}"><meta name="twitter:description" content="${escapeMeta(description)}"><meta name="twitter:image" content="${publicOrigin}/og.png">`;
+}
+
 function page(file,{compact=true}={}){
   return async(req,res)=>{
     try{
@@ -230,7 +242,8 @@ function page(file,{compact=true}={}){
       if(!compact)return res.sendFile(filePath);
       const html=await readFile(filePath,'utf8');
       res.setHeader('Cache-Control','no-store');
-      res.type('html').send(html.includes('</head>')?html.replace('</head>',`${compactChatCss}</head>`):compactChatCss+html);
+      const headAdditions=`${socialMeta(html,req)}${brandRefreshCss}${compactChatCss}`;
+      res.type('html').send(html.includes('</head>')?html.replace('</head>',`${headAdditions}</head>`):headAdditions+html);
     }catch(e){
       console.error('Page render failed:',file,e.message);
       res.status(500).send('Page unavailable');

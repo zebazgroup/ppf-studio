@@ -1,0 +1,719 @@
+:root {
+  --zb-gold: #d8ad54;
+  --zb-gold-bright: #f0cc78;
+  --zb-ink: #040404;
+  --zb-surface: #0a0a0a;
+  --zb-surface-raised: #101010;
+  --zb-line: rgba(255, 255, 255, 0.12);
+  --zb-line-strong: rgba(216, 173, 84, 0.42);
+  --zb-copy: #f7f5ef;
+  --zb-muted: #aaa8a2;
+  --zb-radius-sm: 12px;
+  --zb-radius: 20px;
+  --zb-radius-lg: 30px;
+  --zb-shadow: 0 28px 90px rgba(0, 0, 0, 0.52);
+}
+
+html {
+  background: var(--zb-ink);
+  scrollbar-color: #5f4a24 #080808;
+}
+
+body {
+  background:
+    radial-gradient(circle at 84% 9%, rgba(216, 173, 84, 0.1), transparent 23rem),
+    radial-gradient(circle at 5% 42%, rgba(255, 255, 255, 0.035), transparent 20rem),
+    var(--zb-ink) !important;
+  color: var(--zb-copy);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--z-accent, var(--zb-gold));
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--z-accent, var(--zb-gold));
+  color: #080808;
+}
+
+.top,
+.home-v2 .top {
+  background: rgba(4, 4, 4, 0.82) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(22px) saturate(140%);
+}
+
+.nav,
+.home-v2 .nav {
+  min-height: 76px;
+}
+
+.brand-logo,
+.home-v2 .brand-logo {
+  height: 38px;
+  filter: drop-shadow(0 7px 18px rgba(216, 173, 84, 0.12));
+}
+
+.division-name {
+  color: var(--z-accent, var(--zb-gold)) !important;
+  letter-spacing: 0.2em;
+}
+
+body:not(.home-v2) .nav a,
+body:not(.home-v2) .langpick button,
+body:not(.home-v2) .langbtn {
+  border-color: rgba(255, 255, 255, 0.13);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+body:not(.home-v2) .nav a:hover,
+body:not(.home-v2) .langpick button:hover,
+body:not(.home-v2) .langpick button.active {
+  background: rgba(216, 173, 84, 0.09);
+  border-color: var(--zb-line-strong);
+}
+
+/* Division pages */
+body:not(.home-v2) .hero {
+  min-height: min(780px, 80svh);
+  background:
+    linear-gradient(90deg, rgba(3, 3, 3, 0.98) 0%, rgba(3, 3, 3, 0.88) 36%, rgba(3, 3, 3, 0.26) 72%, rgba(3, 3, 3, 0.12) 100%),
+    url('/hero/hero-lambo.webp') center / cover no-repeat !important;
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+[dir='rtl'] body:not(.home-v2) .hero {
+  background:
+    linear-gradient(270deg, rgba(3, 3, 3, 0.98) 0%, rgba(3, 3, 3, 0.88) 36%, rgba(3, 3, 3, 0.26) 72%, rgba(3, 3, 3, 0.12) 100%),
+    url('/hero/hero-lambo.webp') center / cover no-repeat !important;
+}
+
+body[data-title-en*='PPF'] .hero {
+  background-image: linear-gradient(90deg, #030303fa 0%, #030303dc 38%, #03030338 76%), url('/hero/hero-gwagon.webp') !important;
+}
+
+[dir='rtl'] body[data-title-en*='PPF'] .hero {
+  background-image: linear-gradient(270deg, #030303fa 0%, #030303dc 38%, #03030338 76%), url('/hero/hero-gwagon.webp') !important;
+}
+
+body[data-title-en*='FB Oil'] .hero {
+  background-image: linear-gradient(90deg, #030303fa 0%, #030303dc 38%, #03030338 76%), url('/hero/hero-landcruiser.webp') !important;
+}
+
+[dir='rtl'] body[data-title-en*='FB Oil'] .hero {
+  background-image: linear-gradient(270deg, #030303fa 0%, #030303dc 38%, #03030338 76%), url('/hero/hero-landcruiser.webp') !important;
+}
+
+body[data-title-en*='Car Wash'] .hero {
+  background-image: linear-gradient(90deg, #030303fa 0%, #030303dc 38%, #03030338 76%), url('/hero/hero-raptor.webp') !important;
+}
+
+[dir='rtl'] body[data-title-en*='Car Wash'] .hero {
+  background-image: linear-gradient(270deg, #030303fa 0%, #030303dc 38%, #03030338 76%), url('/hero/hero-raptor.webp') !important;
+}
+
+body[data-title-en*='Game Center'] .hero,
+body[data-title-en*='ZEBAZ AI'] .hero {
+  background-image: linear-gradient(90deg, #030303fa 0%, #030303dc 38%, #03030338 76%), url('/hero/hero-range.webp') !important;
+}
+
+[dir='rtl'] body[data-title-en*='Game Center'] .hero,
+[dir='rtl'] body[data-title-en*='ZEBAZ AI'] .hero {
+  background-image: linear-gradient(270deg, #030303fa 0%, #030303dc 38%, #03030338 76%), url('/hero/hero-range.webp') !important;
+}
+
+body:not(.home-v2) .hero.has-image {
+  background: linear-gradient(90deg, #030303fa 0%, #030303dc 38%, #03030338 76%), var(--z-content-image) center / cover no-repeat !important;
+}
+
+[dir='rtl'] body:not(.home-v2) .hero.has-image {
+  background: linear-gradient(270deg, #030303fa 0%, #030303dc 38%, #03030338 76%), var(--z-content-image) center / cover no-repeat !important;
+}
+
+html[data-theme='light'] body:not(.home-v2) .hero {
+  color: #fff !important;
+}
+
+html[data-theme='light'] body:not(.home-v2) .hero h1,
+html[data-theme='light'] body:not(.home-v2) .hero p {
+  color: inherit !important;
+}
+
+body:not(.home-v2) .hero:before {
+  background-size: 72px 72px;
+  opacity: 0.5;
+}
+
+body:not(.home-v2) .hero-in {
+  padding-block: clamp(90px, 12vw, 150px);
+}
+
+body:not(.home-v2) .hero h1 {
+  max-width: 850px;
+  margin-block: 18px 24px;
+  font-size: clamp(48px, 7.3vw, 108px);
+  font-weight: 700;
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+  text-shadow: 0 8px 42px rgba(0, 0, 0, 0.58);
+}
+
+html[lang='ku'] body:not(.home-v2) .hero h1,
+html[lang='ar'] body:not(.home-v2) .hero h1 {
+  line-height: 1.08;
+}
+
+body:not(.home-v2) .hero p {
+  max-width: 690px;
+  color: #cfcdc7;
+  font-size: clamp(15px, 1.5vw, 18px);
+  line-height: 1.9;
+  text-shadow: 0 4px 22px #000;
+}
+
+.eyebrow {
+  color: var(--z-accent, var(--zb-gold)) !important;
+  font-weight: 750;
+  letter-spacing: 0.22em;
+}
+
+.section {
+  padding-block: clamp(68px, 8vw, 112px);
+}
+
+.section.alt {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015)) !important;
+  border-color: rgba(255, 255, 255, 0.09);
+}
+
+.title {
+  max-width: 900px;
+  margin-top: 14px;
+  font-size: clamp(38px, 5.5vw, 72px);
+  font-weight: 650;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+.lead {
+  font-size: clamp(15px, 1.6vw, 18px);
+}
+
+.grid {
+  gap: 18px;
+  margin-top: 42px;
+}
+
+.card,
+.panel,
+.metric,
+.form-card,
+.ai-shell {
+  border-color: rgba(255, 255, 255, 0.11);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.055), transparent 70%),
+    var(--zb-surface) !important;
+  border-radius: var(--zb-radius);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.025);
+}
+
+.card {
+  min-height: 245px;
+  padding: 28px;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: var(--zb-line-strong) !important;
+  box-shadow: var(--zb-shadow);
+}
+
+.card .num {
+  color: var(--z-accent, var(--zb-gold));
+  letter-spacing: 0.2em;
+}
+
+.card h3,
+.panel h3 {
+  font-size: clamp(21px, 2.2vw, 28px);
+  font-weight: 620;
+}
+
+.card p,
+.panel p {
+  color: var(--zb-muted);
+  line-height: 1.85;
+}
+
+.media-frame {
+  min-height: 270px;
+  margin: -13px -13px 24px;
+  border-radius: 15px;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.cta,
+.submit,
+.composer button {
+  min-height: 48px;
+  border-radius: var(--zb-radius-sm);
+}
+
+.cta.primary,
+.submit,
+.composer button {
+  box-shadow: 0 15px 45px rgba(216, 173, 84, 0.15);
+}
+
+.form-card,
+.ai-shell {
+  box-shadow: var(--zb-shadow);
+}
+
+.field input,
+.field select,
+.field textarea,
+.composer input {
+  min-height: 48px;
+  border-radius: var(--zb-radius-sm);
+}
+
+.footer,
+.home-v2 .footer {
+  background: #050505 !important;
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Homepage */
+.home-v2 .nav {
+  width: min(1440px, 92%);
+}
+
+.home-v2 .navlinks > a {
+  color: #d8d6d0;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+}
+
+.home-v2 .book-top {
+  border-radius: 999px !important;
+  background: rgba(216, 173, 84, 0.09) !important;
+}
+
+body.home-v2 .hv-hero:not(.has-image):before,
+html[data-theme='light'] body.home-v2 .hv-hero:not(.has-image):before {
+  background: linear-gradient(90deg, #020202fa 0%, #020202e6 35%, #0202023d 74%), url('/hero/hero-lambo.webp') center / cover no-repeat !important;
+}
+
+[dir='rtl'] body.home-v2 .hv-hero:not(.has-image):before,
+html[data-theme='light'][dir='rtl'] body.home-v2 .hv-hero:not(.has-image):before {
+  background: linear-gradient(270deg, #020202fa 0%, #020202e6 35%, #0202023d 74%), url('/hero/hero-lambo.webp') center / cover no-repeat !important;
+}
+
+.hv-copy h1 {
+  text-wrap: balance;
+}
+
+.hv-btn {
+  min-height: 48px;
+  border-radius: 999px !important;
+  padding-inline: 24px !important;
+}
+
+.hv-strip {
+  display: block !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: #070707;
+}
+
+.hv-strip-inner {
+  width: min(1440px, 92%);
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.hv-stat {
+  min-height: 104px;
+  padding: 24px;
+  border-inline-end: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.hv-stat:last-child {
+  border-inline-end: 0;
+}
+
+.hv-stat strong {
+  color: var(--z-accent, var(--zb-gold));
+  font-size: clamp(24px, 2.4vw, 38px);
+  font-weight: 650;
+}
+
+.hv-stat span {
+  color: #8f8d87;
+  font-size: 12px;
+}
+
+.hv-section {
+  padding-block: clamp(72px, 8vw, 120px);
+}
+
+.hv-wrap {
+  width: min(1440px, 92%);
+}
+
+.hv-head {
+  display: flex !important;
+  align-items: end;
+  justify-content: space-between;
+  gap: 50px;
+  margin-bottom: 36px;
+}
+
+.hv-head .tag,
+.hv-owner-copy .tag {
+  color: var(--z-accent, var(--zb-gold));
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+}
+
+.hv-head h2 {
+  max-width: 760px;
+  margin: 10px 0 0;
+  font-size: clamp(36px, 4.5vw, 68px);
+  font-weight: 650;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.hv-head > p {
+  max-width: 520px;
+  margin: 0;
+  color: var(--zb-muted);
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+.hv-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+}
+
+.hv-card,
+.hv-card.feature {
+  grid-column: span 4 !important;
+  min-height: 390px !important;
+  padding: 28px 24px;
+  border-color: rgba(255, 255, 255, 0.13);
+  border-radius: var(--zb-radius);
+  background-position: center !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.015);
+}
+
+.hv-card[href='/ppf'],
+.hv-card[href='/studio'] {
+  grid-column: span 6 !important;
+  min-height: 460px !important;
+}
+
+.hv-card[href='/ppf'] {
+  background-image: url('/hero/hero-gwagon.webp') !important;
+}
+
+.hv-card[href='/studio'],
+.hv-card[href='/media'] {
+  background-image: url('/hero/hero-lambo.webp') !important;
+}
+
+.hv-card[href='/fb-oil'] {
+  background-image: url('/hero/hero-landcruiser.webp') !important;
+}
+
+.hv-card[href='/carwash'] {
+  background-image: url('/hero/hero-raptor.webp') !important;
+}
+
+.hv-card[href='/game-center'] {
+  background-image: url('/hero/hero-range.webp') !important;
+}
+
+.hv-card[href='/ai'] {
+  background-image: linear-gradient(180deg, rgba(0, 28, 44, 0.16), rgba(0, 13, 24, 0.84)), url('/hero/hero-gwagon.webp') !important;
+}
+
+.hv-card[href='/media'] {
+  display: flex !important;
+}
+
+.hv-card:before {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 12%, rgba(0, 0, 0, 0.52) 56%, #020202 100%);
+}
+
+.hv-card:hover {
+  transform: translateY(-7px);
+  border-color: var(--zb-line-strong);
+  box-shadow: var(--zb-shadow);
+}
+
+.hv-card .ico {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--zb-radius-sm);
+  backdrop-filter: blur(12px);
+}
+
+.hv-card h3 {
+  font-size: clamp(20px, 2.1vw, 30px);
+  font-weight: 620;
+}
+
+.hv-card p {
+  max-width: 460px;
+  color: #c5c2ba;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.hv-card .more {
+  margin-top: 17px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.hv-owner {
+  padding-block: 20px 100px;
+}
+
+.hv-owner-grid {
+  border-color: rgba(255, 255, 255, 0.11);
+  border-radius: var(--zb-radius-lg);
+  box-shadow: var(--zb-shadow);
+}
+
+.hv-owner-copy,
+.hv-owner-visual {
+  min-height: 480px;
+  padding: clamp(34px, 5vw, 70px);
+}
+
+body.home-v2 .hv-owner-visual,
+html[data-theme='light'] body.home-v2 .hv-owner-visual {
+  background: linear-gradient(90deg, rgba(8, 8, 8, 0.08), rgba(8, 8, 8, 0.7)), url('/hero/hero-range.webp') center / cover no-repeat !important;
+}
+
+.hv-owner-copy h2 {
+  font-size: clamp(36px, 4vw, 62px);
+}
+
+.hv-metric {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.hv-locations {
+  gap: 16px;
+}
+
+.hv-location {
+  min-height: 370px;
+  padding: 240px 26px 28px;
+  border-color: rgba(255, 255, 255, 0.11);
+  border-radius: var(--zb-radius);
+}
+
+.hv-location:before {
+  height: 225px;
+  background: linear-gradient(180deg, transparent 35%, #080808 100%), url('/hero/hero-landcruiser.webp') center / cover no-repeat !important;
+}
+
+.hv-location:nth-child(2):before {
+  background-image: linear-gradient(180deg, transparent 35%, #080808 100%), url('/hero/hero-range.webp') !important;
+}
+
+.hv-location:nth-child(3):before {
+  background-image: linear-gradient(180deg, transparent 35%, #080808 100%), url('/hero/hero-raptor.webp') !important;
+}
+
+.hv-location h3 {
+  font-size: clamp(19px, 2vw, 26px);
+}
+
+.hv-contact {
+  padding-bottom: 86px;
+}
+
+.hv-contact-box {
+  padding: clamp(28px, 4vw, 52px);
+  border-color: rgba(255, 255, 255, 0.12);
+  border-radius: var(--zb-radius-lg);
+  background:
+    radial-gradient(circle at 86% 20%, rgba(216, 173, 84, 0.11), transparent 20rem),
+    #0a0a0a;
+}
+
+.hv-contact-box h2 {
+  font-size: clamp(31px, 4vw, 58px);
+}
+
+.hv-phones a {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+}
+
+@media (max-width: 1100px) {
+  .hv-head {
+    align-items: start;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .hv-card,
+  .hv-card.feature {
+    grid-column: span 6 !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .nav,
+  .home-v2 .nav {
+    min-height: 66px;
+  }
+
+  body:not(.home-v2) .hero,
+  [dir='rtl'] body:not(.home-v2) .hero {
+    min-height: 660px;
+    background-position: 60% center !important;
+  }
+
+  body:not(.home-v2) .hero {
+    background-image: linear-gradient(0deg, #030303fa 0%, #030303df 46%, #03030345 100%), url('/hero/hero-lambo.webp') !important;
+  }
+
+  body[data-title-en*='PPF'] .hero {
+    background-image: linear-gradient(0deg, #030303fa 0%, #030303df 46%, #03030345 100%), url('/hero/hero-gwagon.webp') !important;
+  }
+
+  body[data-title-en*='FB Oil'] .hero {
+    background-image: linear-gradient(0deg, #030303fa 0%, #030303df 46%, #03030345 100%), url('/hero/hero-landcruiser.webp') !important;
+  }
+
+  body[data-title-en*='Car Wash'] .hero {
+    background-image: linear-gradient(0deg, #030303fa 0%, #030303df 46%, #03030345 100%), url('/hero/hero-raptor.webp') !important;
+  }
+
+  body[data-title-en*='Game Center'] .hero,
+  body[data-title-en*='ZEBAZ AI'] .hero {
+    background-image: linear-gradient(0deg, #030303fa 0%, #030303df 46%, #03030345 100%), url('/hero/hero-range.webp') !important;
+  }
+
+  body:not(.home-v2) .hero.has-image,
+  [dir='rtl'] body:not(.home-v2) .hero.has-image {
+    background: linear-gradient(0deg, #030303fa 0%, #030303df 46%, #03030345 100%), var(--z-content-image) center / cover no-repeat !important;
+  }
+
+  body:not(.home-v2) .hero-in {
+    padding-top: 270px;
+    padding-bottom: 72px;
+  }
+
+  body:not(.home-v2) .hero h1 {
+    font-size: clamp(42px, 13vw, 62px);
+  }
+
+  .section {
+    padding-block: 68px;
+  }
+
+  .card {
+    min-height: 215px;
+    padding: 24px;
+  }
+
+  .hv-strip-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hv-stat {
+    min-height: 88px;
+    padding: 18px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  }
+
+  .hv-stat:nth-child(2) {
+    border-inline-end: 0;
+  }
+
+  .hv-section {
+    padding-block: 66px;
+  }
+
+  .hv-head h2 {
+    font-size: 39px;
+  }
+
+  .hv-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hv-card,
+  .hv-card.feature,
+  .hv-card[href='/ppf'],
+  .hv-card[href='/studio'] {
+    grid-column: 1 !important;
+    min-height: 340px !important;
+    padding: 22px 19px;
+  }
+
+  .hv-owner {
+    padding-bottom: 76px;
+  }
+
+  .hv-owner-copy,
+  .hv-owner-visual {
+    min-height: 340px;
+    padding: 30px;
+  }
+
+  .hv-owner-visual {
+    min-height: 300px;
+  }
+
+  .hv-contact-box {
+    padding: 28px;
+  }
+
+  .hv-phones {
+    gap: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
