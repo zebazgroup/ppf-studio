@@ -1,0 +1,8 @@
+/* ZEBAZ Cars V4 final visual fixes */
+.c-brand-rail{gap:16px!important;padding:8px 3px 18px!important}
+.c-brand-v4{min-width:158px!important;width:158px!important;min-height:150px!important;padding:16px 12px 13px!important;border-radius:20px!important}
+.c-brand-logo-shell{width:108px!important;height:96px!important;border-radius:18px!important;padding:8px!important}
+.c-brand-logo{width:88px!important;height:80px!important;max-width:88px!important;max-height:80px!important;object-fit:contain!important}
+.c-brand-fallback{font-size:13px!important;font-weight:950!important;padding:0 4px!important}
+.c-brand-v4 small{font-size:12px!important;max-width:132px!important}
+@media(max-width:840px){.c-brand-v4{min-width:146px!important;width:146px!important;min-height:142px!important}.c-brand-logo-shell{width:100px!important;height:90px!important}.c-brand-logo{width:82px!important;height:74px!important;max-width:82px!important;max-height:74px!important}.c-brand-v4 small{font-size:11px!important}}
