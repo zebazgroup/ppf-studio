@@ -26,6 +26,7 @@ RUN node patch-admin-cars-slider.mjs
 RUN node patch-cars-v3.mjs
 RUN node generate-brand-logos.mjs
 RUN node patch-cars-v4.mjs
+RUN node patch-cars-v4-final.mjs
 RUN node patch-admin-v2.mjs
 
 ENV NODE_ENV=production
