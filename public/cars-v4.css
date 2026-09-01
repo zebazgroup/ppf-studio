@@ -1,4 +1,4 @@
-/* ZEBAZ Cars V4 — premium, app-ready, theme-aware marketplace */
+/* ZEBAZ Motors V4 — premium, app-ready, theme-aware marketplace */
 :root{--v4-red:#e71f31;--v4-red2:#c91525;--v4-bg:#f4f5f7;--v4-surface:#fff;--v4-surface2:#fafbfc;--v4-text:#111318;--v4-muted:#70757f;--v4-line:#e5e7eb;--v4-shadow:0 14px 40px rgba(16,24,40,.08);--v4-shadow-lg:0 28px 80px rgba(12,18,28,.14);--v4-radius:20px;--v4-logo-shell:#fff;--v4-good:#11885b;--v4-warn:#a56b00}
 html[data-cars-theme="dark"]{color-scheme:dark;--v4-bg:#0b0d10;--v4-surface:#12151a;--v4-surface2:#171b21;--v4-text:#f4f6f8;--v4-muted:#9ba3ad;--v4-line:#252b33;--v4-shadow:0 14px 42px rgba(0,0,0,.32);--v4-shadow-lg:0 32px 90px rgba(0,0,0,.48);--v4-logo-shell:#f7f7f7;--v4-good:#58d7a4;--v4-warn:#f1b74f}
 html[data-cars-theme="dark"] body.zc-v2{background:radial-gradient(circle at 15% -10%,rgba(231,31,49,.12),transparent 28%),linear-gradient(180deg,#0b0d10,#0d1014 48%,#0a0c0f)!important;color:var(--v4-text)!important}

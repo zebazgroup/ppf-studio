@@ -69,7 +69,7 @@
     if(!link||$('.c-logo-sub'))return;
     const badge=document.createElement('span');
     badge.className='c-logo-sub';
-    badge.textContent='CARS MARKETPLACE';
+    badge.textContent='MOTORS MARKETPLACE';
     link.after(badge);
   }
 
@@ -117,7 +117,7 @@
     if(!top||$('.c-mobile-title'))return;
     const el=document.createElement('div');
     el.className='c-mobile-title';
-    el.innerHTML='<strong>ZEBAZ Cars</strong><small>Marketplace</small>';
+    el.innerHTML='<strong>ZEBAZ Motors</strong><small>Marketplace</small>';
     const style=document.createElement('style');
     style.textContent='.c-mobile-title{display:none}@media(max-width:840px){.c-mobile-title{display:flex;flex-direction:column;line-height:1.05;margin-inline-end:auto}.c-mobile-title strong{font-size:12px;font-weight:950}.c-mobile-title small{font-size:8px;color:#8a8d93;margin-top:3px;letter-spacing:.4px}}';
     document.head.appendChild(style);
