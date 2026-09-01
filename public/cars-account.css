@@ -1,0 +1,19 @@
+/* ZEBAZ Motors account gate */
+.c-account-sheet{width:min(470px,100%)!important}
+.c-account-tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:15px 0 12px;padding:4px;border-radius:13px;background:var(--c-soft)}
+.c-account-tab{height:39px;border:0;border-radius:10px;background:transparent;color:var(--c-muted);font-weight:850;cursor:pointer}
+.c-account-tab.active{background:var(--c-card);color:var(--c-ink);box-shadow:0 5px 18px rgba(15,23,42,.08)}
+.c-account-form{display:grid;gap:11px}
+.c-account-form .c-btn{width:100%;margin-top:2px}
+.c-account-note{margin:12px 0 0;color:var(--c-muted);font-size:10px;line-height:1.7;text-align:center}
+.c-account-member{padding:18px 2px 2px;text-align:center}
+.c-account-avatar{width:58px;height:58px;margin:0 auto 10px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(145deg,#ff3b30,#c91e29);color:#fff;font-size:24px;font-weight:950}
+.c-account-member h3{margin:0 0 5px}.c-account-member p{margin:0 0 16px;color:var(--c-muted);direction:ltr}
+.c-account-required{padding:10px 12px;border:1px solid rgba(255,59,48,.24);border-radius:12px;background:rgba(255,59,48,.07);color:var(--c-ink);font-size:11px;line-height:1.6}
+html[data-theme="dark"] .c-account-tab.active,html[data-cars-theme="dark"] .c-account-tab.active{background:#24262b;color:#fff}
+html[data-theme="dark"] .c-account-required,html[data-cars-theme="dark"] .c-account-required{color:#fff}
+@media(max-width:760px){
+  .c-actions{grid-template-columns:minmax(0,1fr) auto auto auto!important}
+  #accountButton{width:42px;padding:0}
+  #accountButton .c-account-label{display:none}
+}
