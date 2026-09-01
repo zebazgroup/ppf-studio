@@ -5,13 +5,21 @@
 .c-account-tab.active{background:var(--c-card);color:var(--c-ink);box-shadow:0 5px 18px rgba(15,23,42,.08)}
 .c-account-form{display:grid;gap:11px}
 .c-account-form .c-btn{width:100%;margin-top:2px}
+.c-otp-field input,#accountMemberOtp{direction:ltr;text-align:center;letter-spacing:.42em;font-size:22px;font-weight:900;font-variant-numeric:tabular-nums}
+.c-account-resend{border:0;background:transparent;color:#d62836;font:inherit;font-size:11px;font-weight:850;cursor:pointer;padding:4px;text-align:center}
+.c-account-resend:disabled{opacity:.45;cursor:wait}
 .c-account-note{margin:12px 0 0;color:var(--c-muted);font-size:10px;line-height:1.7;text-align:center}
 .c-account-member{padding:18px 2px 2px;text-align:center}
 .c-account-avatar{width:58px;height:58px;margin:0 auto 10px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(145deg,#ff3b30,#c91e29);color:#fff;font-size:24px;font-weight:950}
 .c-account-member h3{margin:0 0 5px}.c-account-member p{margin:0 0 16px;color:var(--c-muted);direction:ltr}
+.c-member-verify{display:grid;gap:9px;margin:0 0 14px;padding:14px;border:1px solid rgba(255,59,48,.24);border-radius:14px;background:rgba(255,59,48,.07);text-align:start}
+.c-member-verify strong{font-size:13px}.c-member-verify span{color:var(--c-muted);font-size:11px;line-height:1.6}
+#accountMemberCodeWrap{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+#accountMemberCodeWrap input{width:100%;min-width:0;border:1px solid var(--c-line);border-radius:11px;background:var(--c-card);color:var(--c-ink)}
+#accountMemberCodeWrap .c-btn{white-space:nowrap}
 .c-account-required{padding:10px 12px;border:1px solid rgba(255,59,48,.24);border-radius:12px;background:rgba(255,59,48,.07);color:var(--c-ink);font-size:11px;line-height:1.6}
 html[data-theme="dark"] .c-account-tab.active,html[data-cars-theme="dark"] .c-account-tab.active{background:#24262b;color:#fff}
-html[data-theme="dark"] .c-account-required,html[data-cars-theme="dark"] .c-account-required{color:#fff}
+html[data-theme="dark"] .c-account-required,html[data-cars-theme="dark"] .c-account-required,html[data-theme="dark"] .c-member-verify,html[data-cars-theme="dark"] .c-member-verify{color:#fff}
 @media(max-width:760px){
   .c-actions{grid-template-columns:minmax(0,1fr) auto auto auto!important}
   #accountButton{width:42px;padding:0}

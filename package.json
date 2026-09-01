@@ -5,7 +5,7 @@
   "type": "module",
   "description": "ZEBAZ Group website, Cars marketplace, AI Studio and admin control center",
   "main": "server.js",
-  "scripts": {"start":"node server.js"},
+  "scripts": {"start":"node server.js","test:otp":"node --test test/*.test.mjs"},
   "engines": {"node":">=20.9.0"},
   "dependencies": {
     "express":"^5.1.0",
