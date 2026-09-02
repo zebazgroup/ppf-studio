@@ -1,5 +1,10 @@
 .c-settings{position:relative}
-.c-settings-toggle{white-space:nowrap}
+.c-settings-toggle{width:38px!important;height:38px!important;min-height:38px!important;padding:0!important;white-space:nowrap;border-radius:10px!important}
+.c-settings-toggle-label{display:none}
+.zc-v2 .c-theme-wrap{display:none!important}
+.zc-v2 .c-actions{gap:5px!important}
+.zc-v2 .c-actions>.c-btn{height:38px!important;min-height:38px!important;padding-inline:10px!important;border-radius:10px!important;font-size:11px!important}
+.zc-v2 .c-actions>.c-btn.icon{width:38px!important;padding:0!important}
 .c-settings-menu{position:absolute;top:calc(100% + 10px);inset-inline-end:0;width:290px;padding:14px;background:var(--c-card,#fff);color:var(--c-ink,#17181b);border:1px solid var(--c-line,#e7e8eb);border-radius:18px;box-shadow:0 22px 70px rgba(15,23,42,.2);z-index:1200}
 .c-settings-menu[hidden]{display:none!important}
 .c-settings-title{display:flex;align-items:center;justify-content:space-between;font-size:15px;font-weight:900;padding:1px 2px 11px;border-bottom:1px solid var(--c-line,#e7e8eb)}
@@ -13,4 +18,5 @@
 .c-theme-options button.active{border-color:var(--c-red,#ff3b30);background:rgba(255,59,48,.09);color:var(--c-red,#ff3b30)}
 html[data-theme="dark"] .c-settings-menu{background:#191a1e;border-color:#303239;box-shadow:0 22px 70px rgba(0,0,0,.5)}
 html[data-theme="dark"] .c-settings-field select,html[data-theme="dark"] .c-theme-options button,html[data-theme="dark"] .c-settings-close{background:#23252a;border-color:#35383f;color:#f5f5f5}
-@media(max-width:760px){.c-settings-toggle{width:42px;padding:0}.c-settings-toggle-label{display:none}.c-settings-menu{position:fixed;top:calc(66px + env(safe-area-inset-top));left:10px;right:10px;width:auto}.c-actions{grid-template-columns:auto minmax(0,1fr) auto auto!important}.c-actions .c-account-btn{display:none}}
+@media(max-width:1180px){.zc-v2 .c-actions .c-city-btn{display:none!important}.zc-v2 .c-account-btn{width:38px!important;padding:0!important;font-size:0!important}.zc-v2 .c-account-btn>span:first-child{font-size:16px!important}}
+@media(max-width:760px){.c-settings-menu{position:fixed;top:calc(58px + env(safe-area-inset-top));left:8px;right:8px;width:auto}.zc-v2 .c-actions{display:flex!important;width:100%!important;justify-content:flex-start!important}.zc-v2 .c-actions #topSearch{display:none!important}.zc-v2 .c-actions #topSell{margin-inline-start:auto!important}.zc-v2 .c-actions .c-account-btn{display:inline-flex!important}}
