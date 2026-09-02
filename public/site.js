@@ -74,7 +74,7 @@
     document.querySelectorAll('[data-ku-html]').forEach(el=>{const v=el.dataset[lang+'Html'];if(v!==undefined)el.innerHTML=v});
     document.querySelectorAll('[data-ku-placeholder]').forEach(el=>{const v=el.dataset[lang+'Placeholder'];if(v!==undefined)el.placeholder=v});
     const body=document.body,title=body&&body.dataset['title'+cap(lang)];if(title)document.title=title;
-    document.querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+    document.querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));\n    document.querySelectorAll('[data-lang-select]').forEach(s=>{s.value=lang});
     const gate=document.querySelector('[data-lang-gate]');if(gate)gate.style.display='none';
     applyContent(lang);
     updateChatLanguage(lang);
@@ -133,5 +133,5 @@
   window.ZebazTheme={get:getTheme,set:mode=>applyTheme(mode,true),apply:applyTheme};
   window.ZebazColor={get:getColor,set:color=>applyColor(color,true),apply:applyColor};
 
-  document.addEventListener('DOMContentLoaded',()=>{injectThemeStyles();addGlobalMenu();addAppearanceDock();addAiChat();const saved=localStorage.getItem(LANG_KEY);applyLang(saved||'ku',false);applyTheme(getTheme(),false);applyColor(getColor(),false);const gate=document.querySelector('[data-lang-gate]');if(gate&&!saved)gate.style.display='flex';document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang,true)));document.querySelectorAll('[data-open-language]').forEach(b=>b.addEventListener('click',openLanguage));loadContent()});
+  document.addEventListener('DOMContentLoaded',()=>{injectThemeStyles();addGlobalMenu();addAppearanceDock();addAiChat();const saved=localStorage.getItem(LANG_KEY);applyLang(saved||'ku',false);applyTheme(getTheme(),false);applyColor(getColor(),false);const gate=document.querySelector('[data-lang-gate]');if(gate&&!saved)gate.style.display='flex';document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang,true)));document.querySelectorAll('[data-lang-select]').forEach(s=>s.addEventListener('change',()=>applyLang(s.value,true)));document.querySelectorAll('[data-open-language]').forEach(b=>b.addEventListener('click',openLanguage));loadContent()});
 })();
