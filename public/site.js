@@ -74,7 +74,8 @@
     document.querySelectorAll('[data-ku-html]').forEach(el=>{const v=el.dataset[lang+'Html'];if(v!==undefined)el.innerHTML=v});
     document.querySelectorAll('[data-ku-placeholder]').forEach(el=>{const v=el.dataset[lang+'Placeholder'];if(v!==undefined)el.placeholder=v});
     const body=document.body,title=body&&body.dataset['title'+cap(lang)];if(title)document.title=title;
-    document.querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));\n    document.querySelectorAll('[data-lang-select]').forEach(s=>{s.value=lang});
+    document.querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+    document.querySelectorAll('[data-lang-select]').forEach(s=>{s.value=lang});
     const gate=document.querySelector('[data-lang-gate]');if(gate)gate.style.display='none';
     applyContent(lang);
     updateChatLanguage(lang);
